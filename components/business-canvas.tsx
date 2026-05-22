@@ -14,6 +14,8 @@ import {
   Receipt
 } from "lucide-react"
 import { useRef } from "react"
+import { SectionHeader } from "@/components/section-header"
+import { staggerContainer, popIn, slideFromLeft } from "@/lib/motion-presets"
 
 const canvasData = {
   sociosClave: {
@@ -22,12 +24,12 @@ const canvasData = {
     color: "bg-primary/10 text-primary",
     hoverBg: "group-hover:bg-primary/20",
     items: [
-      "Proveedores de microencapsulacion e indicadores de pH",
-      "Cadenas retail: supermercados, droguerias, hard discount",
-      "Marketplaces: Amazon, Mercado Libre",
-      "Asociaciones odontologicas y universidades",
-      "Influencers de salud y bienestar",
-      "Centros de investigacion"
+      "Diana Agrícola: insumos y trazabilidad desde el campo",
+      "Inversiones JMH S.A.S.: infraestructura y capital de lanzamiento",
+      "Supermercados y canal moderno (Éxito, Jumbo, Oxxo, Ara, D1)",
+      "Plataformas delivery: Rappi y Turbo",
+      "Proveedores de empaque laminado y tecnología UHT",
+      "Campus universitarios para vending y activaciones"
     ]
   },
   actividadesClave: {
@@ -36,10 +38,10 @@ const canvasData = {
     color: "bg-chart-2/20 text-chart-2",
     hoverBg: "group-hover:bg-chart-2/30",
     items: [
-      "I+D y pruebas de estabilidad/seguridad",
-      "Produccion y control de calidad",
-      "Marketing educativo y demostraciones",
-      "Gestion de canales y e-commerce"
+      "Precocción controlada y sellado Steam-Tech",
+      "Control de calidad e inocuidad (ISO / HACCP)",
+      "Marketing educativo (#Diana90sChallenge)",
+      "Gestión omnicanal: retail, conveniencia y e-commerce"
     ]
   },
   recursosClave: {
@@ -48,11 +50,11 @@ const canvasData = {
     color: "bg-chart-3/20 text-chart-3",
     hoverBg: "group-hover:bg-chart-3/30",
     items: [
-      "Marca Colgate (reconocimiento y confianza)",
-      "Tecnologia de microencapsulacion",
-      "Red de distribucion consolidada",
-      "Equipo de marketing y trade marketing",
-      "Certificaciones regulatorias"
+      "Marca Diana (+60 años de confianza)",
+      "Plantas de procesamiento del Grupo Diana",
+      "Red logística Alimentos y Bebidas",
+      "Maquinaria de esterilización y sellado de pouches",
+      "Equipo técnico agroindustrial y comercial"
     ]
   },
   propuestaValor: {
@@ -61,11 +63,11 @@ const canvasData = {
     color: "bg-primary/10 text-primary",
     hoverBg: "group-hover:bg-primary/20",
     items: [
-      "Primera crema dental con alerta visual de acidez",
-      "Hace visible un riesgo invisible",
-      "Refuerza habitos de autocuidado en tiempo real",
-      "Combina ciencia preventiva + experiencia interactiva",
-      "Posicionamiento innovador, educativo y tecnologico"
+      "Arroz listo en 90 segundos en microondas",
+      "Tecnología Steam-Tech: textura perfecta del grano",
+      "Conveniencia sin sacrificar calidad premium",
+      "Integración vertical: del campo al pouch",
+      "Variantes tradicional y quinua con verduras"
     ]
   },
   relacionCliente: {
@@ -74,9 +76,10 @@ const canvasData = {
     color: "bg-chart-4/20 text-chart-4",
     hoverBg: "group-hover:bg-chart-4/30",
     items: [
-      "Contenido educativo (salud bucal, pH, caries)",
-      "Atencion posventa y FAQ web/QR",
-      "Alianzas con odontologos e influencers de salud"
+      "Contenido educativo sobre ahorro de tiempo",
+      "Embajadores de marca en universidades",
+      "Campañas en TikTok, Instagram y LinkedIn",
+      "Combos con bebidas Glacial del grupo"
     ]
   },
   canales: {
@@ -85,10 +88,11 @@ const canvasData = {
     color: "bg-accent/20 text-accent",
     hoverBg: "group-hover:bg-accent/30",
     items: [
-      "Grandes superficies: Exito, Jumbo, Olimpica, Alkosto",
-      "Droguerias: Cruz Verde, Farmatodo, La Rebaja",
-      "Marketplaces: Mercado Libre, Amazon, Rappi",
-      "Activaciones: universidades, ferias de salud"
+      "Grandes superficies y tiendas especializadas",
+      "Tiendas de conveniencia (Oxxo, Ara, D1)",
+      "Vending en campus universitarios",
+      "Rappi / Turbo y tiendas virtuales",
+      "Tiendas de barrio en zonas universitarias"
     ]
   },
   segmentoClientes: {
@@ -97,11 +101,10 @@ const canvasData = {
     color: "bg-chart-5/20 text-chart-5",
     hoverBg: "group-hover:bg-chart-5/30",
     items: [
-      "Primario: Adultos jovenes 18-35 anos",
-      "Padres de ninos entre 6-14 anos",
-      "Secundario: Consumidores premium/early adopters",
-      "Instituciones educativas",
-      "Empresas con programas de bienestar"
+      "Jóvenes profesionales (DINKs): rentabilidad y premium",
+      "Estudiantes universitarios: volumen y penetración",
+      "Hogares unipersonales: porciones exactas",
+      "Parejas sin hijos y oficinistas urbanos 18-40 años"
     ]
   },
   estructuraCostos: {
@@ -110,13 +113,12 @@ const canvasData = {
     color: "bg-destructive/10 text-destructive",
     hoverBg: "group-hover:bg-destructive/20",
     items: [
-      "Desarrollo tecnologico y validacion cientifica",
-      "Materias primas (microcapsulas + base fluorada)",
-      "Produccion y control de calidad",
-      "Marketing educativo y lanzamiento",
-      "Trade marketing y exhibicion en PDV",
-      "Logistica y distribucion",
-      "Costos regulatorios y certificaciones"
+      "Materias primas e insumos de pouch",
+      "Maquinaria Steam-Tech y línea UHT",
+      "Nómina operativa y calidad",
+      "Marketing de lanzamiento y trade",
+      "Logística multicanal",
+      "Regulatorio INVIMA y certificaciones"
     ]
   },
   fuentesIngreso: {
@@ -125,85 +127,35 @@ const canvasData = {
     color: "bg-chart-4/20 text-chart-4",
     hoverBg: "group-hover:bg-chart-4/30",
     items: [
-      "Venta unitaria retail",
-      "Multipacks familiares",
-      "Ediciones especiales (kids / whitening)",
-      "Canal institucional (kits escolares y corporativos)",
-      "E-commerce con modelo de suscripcion"
+      "Venta unitaria pouch ($5.500 COP referencia)",
+      "Combos 3x4 y bundles con Glacial",
+      "Variante premium quinua con verduras",
+      "Canal vending institucional",
+      "Expansión a 5 ciudades piloto año 1"
     ]
   }
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1
-    }
-  }
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15
-    }
-  }
-}
+const gridStagger = staggerContainer(0.07, 0.1)
+const cardPop = popIn
 
 export function BusinessCanvas() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <section className="py-24 bg-background overflow-hidden">
+    <section className="py-24 overflow-hidden">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "100px" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-1 bg-primary mx-auto mb-6 rounded-full"
-          />
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-foreground mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            Business Model Canvas
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            Modelo de negocio integral para el lanzamiento y escalamiento de Colgate Biolumin en el mercado colombiano.
-          </motion.p>
-        </motion.div>
+        <SectionHeader
+          icon={Heart}
+          title="Business Model Canvas"
+          iconBoxClassName="bg-primary/15"
+          description="Modelo de negocio integral para el lanzamiento de Diana Express en el segmento Ready-to-Eat del mercado colombiano."
+        />
 
-        {/* Canvas Grid - Following standard BMC layout */}
         <motion.div 
           ref={ref}
-          variants={containerVariants}
+          variants={gridStagger}
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
           className="grid grid-cols-1 lg:grid-cols-5 gap-4"
@@ -232,25 +184,21 @@ export function BusinessCanvas() {
 
         {/* Footer info */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={slideFromLeft}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
           className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground"
         >
           {[
-            { label: "Disenado para", value: "COLGATE" },
-            { label: "Disenado por", value: "GRUPO #2" },
-            { label: "Fecha", value: "20-02-26" },
-            { label: "Version", value: "#1" }
+            { label: "Disenado para", value: "GRUPO DIANA" },
+            { label: "Unidad", value: "ALIMENTOS" },
+            { label: "Fecha", value: "2026" },
+            { label: "Version", value: "PILOTO" }
           ].map((item, index) => (
             <motion.span 
               key={index}
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.7 + index * 0.1 }}
-              className="bg-muted/50 px-4 py-2 rounded-full"
+              className="bg-white/90 border border-primary/20 px-4 py-2 rounded-full shadow-sm"
             >
               <strong>{item.label}:</strong> {item.value}
             </motion.span>
@@ -277,17 +225,14 @@ function CanvasCard({ data, className = "", index }: CanvasCardProps) {
   const Icon = data.icon
   
   return (
-    <motion.div variants={cardVariants}>
-      <Card className={`h-full bg-card border-border hover:shadow-lg transition-all duration-300 group overflow-hidden ${className}`}>
-        <motion.div
-          className={`absolute inset-0 ${data.hoverBg} opacity-0 transition-opacity duration-300`}
-        />
+    <motion.div variants={cardPop} whileHover={{ y: -4, transition: { duration: 0.2 } }}>
+      <Card className={`h-full bg-white/95 border-2 border-border/80 shadow-sm group overflow-hidden ${className}`}>
         <CardHeader className="pb-3 relative">
           <CardTitle className="flex items-center gap-2 text-base">
             <motion.span 
-              className={`p-2 rounded-lg ${data.color} transition-transform duration-300 group-hover:scale-110`}
-              whileHover={{ rotate: [0, -10, 10, 0] }}
-              transition={{ duration: 0.5 }}
+              className={`p-2 rounded-lg ${data.color}`}
+              whileHover={{ scale: 1.12 }}
+              transition={{ duration: 0.2 }}
             >
               <Icon className="w-4 h-4" />
             </motion.span>
@@ -297,22 +242,15 @@ function CanvasCard({ data, className = "", index }: CanvasCardProps) {
         <CardContent className="pt-0 relative">
           <ul className="space-y-2">
             {data.items.map((item, itemIndex) => (
-              <motion.li 
+              <li 
                 key={itemIndex} 
                 className="text-sm text-muted-foreground flex items-start gap-2 group/item"
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 + index * 0.05 + itemIndex * 0.03 }}
               >
-                <motion.span 
-                  className="w-1.5 h-1.5 rounded-full bg-primary/40 mt-2 shrink-0"
-                  whileHover={{ scale: 2, backgroundColor: "var(--primary)" }}
-                />
+                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                 <span className="group-hover/item:text-foreground transition-colors duration-200">
                   {item}
                 </span>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </CardContent>

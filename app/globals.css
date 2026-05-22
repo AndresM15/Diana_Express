@@ -4,89 +4,101 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Colgate Brand - Premium Clean */
-  --background: oklch(0.995 0 0);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  
-  /* Colgate Red as Primary */
-  --primary: oklch(0.55 0.22 25);
-  --primary-foreground: oklch(1 0 0);
-  
-  /* Light gray secondary */
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  
-  /* Neutral muted */
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  
-  /* Teal/Cyan accent for pH/Tech */
-  --accent: oklch(0.75 0.12 195);
-  --accent-foreground: oklch(0.15 0 0);
-  
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(1 0 0);
-  
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
-  --ring: oklch(0.55 0.22 25);
-  
-  /* Chart colors - Colgate palette */
-  --chart-1: oklch(0.55 0.22 25);
-  --chart-2: oklch(0.65 0.12 195);
-  --chart-3: oklch(0.5 0.08 260);
-  --chart-4: oklch(0.7 0.15 145);
-  --chart-5: oklch(0.6 0.1 85);
-  
+  /* Grupo Diana — rojo, azul y blanco */
+  --diana-red: oklch(0.52 0.24 27);
+  --diana-red-hover: oklch(0.46 0.24 27);
+  --diana-red-light: oklch(0.97 0.03 27);
+  --diana-blue: oklch(0.38 0.16 258);
+  --diana-blue-mid: oklch(0.48 0.14 258);
+  --diana-blue-light: oklch(0.94 0.04 258);
+  --diana-navy: oklch(0.22 0.08 258);
+  --diana-white: oklch(1 0 0);
+
+  --background: var(--diana-white);
+  --foreground: oklch(0.2 0.04 258);
+  --card: var(--diana-white);
+  --card-foreground: oklch(0.2 0.04 258);
+  --popover: var(--diana-white);
+  --popover-foreground: oklch(0.2 0.04 258);
+
+  --primary: var(--diana-red);
+  --primary-foreground: var(--diana-white);
+
+  --secondary: var(--diana-blue-light);
+  --secondary-foreground: var(--diana-blue);
+
+  --muted: oklch(0.97 0.015 258);
+  --muted-foreground: oklch(0.48 0.06 258);
+
+  --accent: var(--diana-blue);
+  --accent-foreground: var(--diana-white);
+
+  --destructive: var(--diana-red);
+  --destructive-foreground: var(--diana-white);
+
+  --border: oklch(0.9 0.02 258);
+  --input: oklch(0.9 0.02 258);
+  --ring: var(--diana-red);
+
+  --chart-1: var(--diana-red);
+  --chart-2: var(--diana-blue);
+  --chart-3: var(--diana-blue-mid);
+  --chart-4: oklch(0.75 0.08 258);
+  --chart-5: oklch(0.65 0.12 27);
+
   --radius: 0.75rem;
-  
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.55 0.22 25);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.55 0.22 25);
+
+  --sidebar: var(--diana-white);
+  --sidebar-foreground: oklch(0.2 0.04 258);
+  --sidebar-primary: var(--diana-red);
+  --sidebar-primary-foreground: var(--diana-white);
+  --sidebar-accent: var(--diana-blue-light);
+  --sidebar-accent-foreground: var(--diana-blue);
+  --sidebar-border: oklch(0.9 0.02 258);
+  --sidebar-ring: var(--diana-red);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --background: var(--diana-navy);
+  --foreground: oklch(0.98 0.01 258);
+  --card: oklch(0.26 0.06 258);
+  --card-foreground: oklch(0.98 0.01 258);
+  --popover: oklch(0.26 0.06 258);
+  --popover-foreground: oklch(0.98 0.01 258);
+
+  --primary: var(--diana-red);
+  --primary-foreground: var(--diana-white);
+
+  --secondary: oklch(0.32 0.08 258);
+  --secondary-foreground: oklch(0.92 0.04 258);
+
+  --muted: oklch(0.3 0.06 258);
+  --muted-foreground: oklch(0.72 0.04 258);
+
+  --accent: var(--diana-blue-mid);
+  --accent-foreground: var(--diana-white);
+
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: var(--diana-white);
+
+  --border: oklch(0.35 0.06 258);
+  --input: oklch(0.35 0.06 258);
+  --ring: var(--diana-red);
+
+  --chart-1: oklch(0.62 0.22 27);
+  --chart-2: oklch(0.55 0.14 258);
+  --chart-3: oklch(0.48 0.12 258);
+  --chart-4: oklch(0.7 0.08 258);
+  --chart-5: oklch(0.75 0.1 27);
+
+  --sidebar: oklch(0.24 0.07 258);
+  --sidebar-foreground: oklch(0.98 0.01 258);
+  --sidebar-primary: var(--diana-red);
+  --sidebar-primary-foreground: var(--diana-white);
+  --sidebar-accent: oklch(0.32 0.08 258);
+  --sidebar-accent-foreground: oklch(0.92 0.04 258);
+  --sidebar-border: oklch(0.35 0.06 258);
+  --sidebar-ring: var(--diana-red);
 }
 
 @theme inline {
@@ -117,6 +129,11 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-diana-red: var(--diana-red);
+  --color-diana-blue: var(--diana-blue);
+  --color-diana-navy: var(--diana-navy);
+  --color-diana-blue-light: var(--diana-blue-light);
+  --color-diana-red-light: var(--diana-red-light);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -141,9 +158,254 @@
   body {
     @apply bg-background text-foreground;
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
 }
 
-/* Custom scrollbar */
+/* ——— Fondos por sección (cada bloque distinto) ——— */
+.section-surface {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero: diagonal rojo → blanco → azul intenso */
+.section-hero {
+  background: linear-gradient(
+    125deg,
+    #fce8e8 0%,
+    #ffffff 35%,
+    #dce8fa 70%,
+    #b8d4f5 100%
+  );
+}
+
+.section-hero::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 90% 10%, color-mix(in oklch, var(--diana-red) 25%, transparent), transparent),
+    radial-gradient(ellipse 60% 40% at 5% 90%, color-mix(in oklch, var(--diana-blue) 22%, transparent), transparent);
+}
+
+/* Valor: azul sólido claro */
+.section-valor {
+  background: linear-gradient(180deg, #b8d0f0 0%, #e3edf9 55%, #f5f9ff 100%);
+}
+
+.section-valor::before {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    color-mix(in oklch, var(--diana-blue) 6%, transparent) 20px,
+    color-mix(in oklch, var(--diana-blue) 6%, transparent) 22px
+  );
+}
+
+/* Canvas: blanco con puntos rojos */
+.section-canvas {
+  background: #ffffff;
+}
+
+.section-canvas::before {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--diana-red) 14%, transparent) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 28px 28px;
+  opacity: 0.55;
+}
+
+/* KPIs: rosa/rojo suave */
+.section-kpis {
+  background: linear-gradient(160deg, #ffd6d6 0%, #fff0f0 45%, #ffffff 100%);
+}
+
+.section-kpis::before {
+  background: linear-gradient(90deg, var(--diana-red) 0%, transparent 8%, transparent 92%, var(--diana-blue) 100%);
+  opacity: 0.12;
+  height: 6px;
+  inset: auto 0 0 0;
+}
+
+/* Mercado: azul corporativo (texto claro en cabeceras) */
+.section-mercado {
+  background: linear-gradient(145deg, #002d75 0%, #003da5 45%, #1a5fbf 100%);
+  color: #ffffff;
+}
+
+.section-mercado .text-foreground {
+  color: #ffffff;
+}
+
+.section-mercado .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.section-mercado .bg-card {
+  background: #ffffff;
+  color: var(--foreground);
+}
+
+.section-mercado .bg-card .text-foreground {
+  color: oklch(0.2 0.04 258);
+}
+
+.section-mercado .bg-card .text-muted-foreground {
+  color: oklch(0.48 0.06 258);
+}
+
+/* Costos: gris azulado neutro */
+.section-costos {
+  background: linear-gradient(180deg, #eef2f7 0%, #f8fafc 100%);
+}
+
+/* Pronóstico: blanco con franja azul inferior */
+.section-pronostico {
+  background: linear-gradient(0deg, #c5d9f5 0%, #c5d9f5 12%, #ffffff 12%, #ffffff 100%);
+}
+
+/* Producción: rojo muy suave con franjas */
+.section-produccion {
+  background: repeating-linear-gradient(
+    90deg,
+    #fff5f5,
+    #fff5f5 48px,
+    #ffe8e8 48px,
+    #ffe8e8 96px
+  );
+}
+
+/* Datos: navy con grid */
+.section-datos {
+  background: linear-gradient(180deg, #0f2744 0%, #1a3a5c 100%);
+}
+
+.section-datos .text-foreground {
+  color: #ffffff;
+}
+
+.section-datos .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.section-datos .bg-card,
+.section-datos [data-slot="card"] {
+  background: #ffffff;
+}
+
+.section-datos .bg-card .text-foreground,
+.section-datos [data-slot="card"] .text-foreground {
+  color: oklch(0.2 0.04 258);
+}
+
+/* Conclusiones: degradado rojo a azul */
+.section-conclusiones {
+  background: linear-gradient(
+    110deg,
+    #fde8e8 0%,
+    #ffffff 40%,
+    #e0ebfa 75%,
+    #c8daf5 100%
+  );
+}
+
+.dark .section-hero {
+  background: linear-gradient(125deg, #1a1520 0%, var(--diana-navy) 50%, #0f2744 100%);
+}
+
+.dark .section-valor {
+  background: linear-gradient(180deg, #1e3a5c 0%, var(--diana-navy) 100%);
+}
+
+.dark .section-canvas {
+  background: oklch(0.18 0.04 258);
+}
+
+.dark .section-kpis {
+  background: linear-gradient(160deg, #3d1f24 0%, var(--diana-navy) 100%);
+}
+
+.dark .section-mercado {
+  background: linear-gradient(145deg, #0a1628 0%, #003da5 100%);
+}
+
+.dark .section-costos,
+.dark .section-pronostico,
+.dark .section-produccion {
+  background: oklch(0.2 0.05 258);
+}
+
+.dark .section-conclusiones {
+  background: linear-gradient(110deg, #2a1520 0%, var(--diana-navy) 60%, #0f2744 100%);
+}
+
+/* Patrones y utilidades de marca Diana */
+.diana-hero-bg {
+  background: transparent;
+}
+
+.diana-float {
+  animation: diana-float 7s ease-in-out infinite;
+}
+
+.diana-float-delayed {
+  animation: diana-float 9s ease-in-out 1.5s infinite;
+}
+
+@keyframes diana-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-18px) scale(1.03);
+  }
+}
+
+@keyframes diana-shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+.diana-text-gradient {
+  background: linear-gradient(90deg, var(--diana-red), var(--diana-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.diana-brand-bar {
+  background: linear-gradient(90deg, var(--diana-red) 0%, var(--diana-white) 50%, var(--diana-blue) 100%);
+}
+
+.diana-glow-red {
+  background: radial-gradient(circle, color-mix(in oklch, var(--diana-red) 35%, transparent) 0%, transparent 70%);
+}
+
+.diana-glow-blue {
+  background: radial-gradient(circle, color-mix(in oklch, var(--diana-blue) 25%, transparent) 0%, transparent 70%);
+}
+
+/* Scrollbar con acento de marca */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -153,10 +415,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted-foreground);
+  background: color-mix(in oklch, var(--diana-blue) 50%, var(--diana-red) 50%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--foreground);
+  background: var(--diana-red);
 }

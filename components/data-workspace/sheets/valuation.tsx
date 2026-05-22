@@ -88,9 +88,9 @@ export function ValuationSheet({ factors, setFactors, scoringScale, viewMode }: 
             <div className="mt-6 p-4 bg-background/50 rounded-lg">
               <p className="text-sm leading-relaxed">
                 El promedio ponderado obtenido es <strong>{totalPonderado.toFixed(2)}/5</strong>, lo que indica que 
-                la oportunidad de negocio Colgate Biolumin presenta <strong>alta viabilidad</strong> y condiciones 
+                la oportunidad de negocio Diana Express presenta <strong>alta viabilidad</strong> y condiciones 
                 favorables de implementación. La puntuación se sustenta principalmente en la competencia y los recursos 
-                de Colgate-Palmolive, además de la alineación con una tendencia estable hacia la prevención y el autocuidado.
+                del Grupo Diana, además de la tendencia Ready-to-Eat y conveniencia urbana en 2026.
               </p>
             </div>
           </CardContent>

@@ -13,49 +13,49 @@ import { Footer } from "@/components/footer"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background selection:bg-primary/20 selection:text-foreground">
       <Navigation />
-      
-      <div id="hero">
+
+      <div id="hero" className="section-surface section-hero">
         <Hero />
       </div>
-      
-      <div id="valor">
+
+      <div id="valor" className="section-surface section-valor">
         <ValueProposition />
       </div>
-      
-      <div id="canvas">
+
+      <div id="canvas" className="section-surface section-canvas">
         <BusinessCanvas />
       </div>
-      
-      <div id="kpis">
+
+      <div id="kpis" className="section-surface section-kpis">
         <KPIDashboard />
       </div>
-      
-      <div id="mercado">
+
+      <div id="mercado" className="section-surface section-mercado">
         <MarketCharts />
       </div>
-      
-      <div id="costos">
+
+      <div id="costos" className="section-surface section-costos">
         <CostStructure />
       </div>
-      
-      <div id="pronostico">
+
+      <div id="pronostico" className="section-surface section-pronostico">
         <Forecast />
       </div>
-      
-      <div id="produccion">
+
+      <div id="produccion" className="section-surface section-produccion">
         <ProductionProcess />
       </div>
-      
-      <div id="datos">
+
+      <div id="datos" className="section-surface section-datos">
         <DataWorkspace />
       </div>
-      
-      <div id="conclusiones">
+
+      <div id="conclusiones" className="section-surface section-conclusiones">
         <Conclusions />
       </div>
-      
+
       <Footer />
     </main>
   )

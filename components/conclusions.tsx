@@ -14,126 +14,78 @@ import {
   Rocket
 } from "lucide-react"
 import { useRef } from "react"
+import { SectionHeader } from "@/components/section-header"
+import { staggerContainer, riseBounce } from "@/lib/motion-presets"
 
 const keyInsights = [
   {
     icon: TrendingUp,
-    title: "Alta aceptacion del mercado",
-    description: "92.7% de aceptacion potencial con solo 6.4% de rechazo indica un producto con fuerte traccion inicial.",
-    metric: "92.7%",
+    title: "Viabilidad financiera aprobada",
+    description: "VPN de $627.481.530 COP y TIR del 51,20% superan el WACC del 12%. Dictamen técnico-financiero: APROBADO.",
+    metric: "APROBADO",
     color: "text-chart-4",
     bgColor: "bg-chart-4/10"
   },
   {
     icon: Target,
-    title: "Precio optimo identificado",
-    description: "El rango $10,000-$15,000 COP concentra el mayor interes (45%), permitiendo un margen saludable.",
-    metric: "$10K-15K",
+    title: "Precio de venta definido",
+    description: "Precio unitario de $5.500 COP por pouch de 250 g, alineado con la estrategia de valor del segmento urbano.",
+    metric: "$5.500",
     color: "text-primary",
     bgColor: "bg-primary/10"
   },
   {
     icon: Lightbulb,
-    title: "Calidad como driver principal",
-    description: "La calidad es el factor #1 de decision (130 respuestas), alineado con el posicionamiento premium.",
-    metric: "#1",
+    title: "Segmento objetivo claro",
+    description: "Jóvenes profesionales (DINKs) como target principal por rentabilidad; estudiantes aportan volumen en ciudades universitarias.",
+    metric: "DINKs",
     color: "text-accent",
     bgColor: "bg-accent/10"
   }
 ]
 
 const nextSteps = [
-  "Validar comprension del concepto de color y confianza antes de escalar",
-  "Desarrollar estrategia de comunicacion educativa sobre el indicador de pH",
-  "Planificar activaciones con odontologos e influencers de salud",
-  "Definir metricas de seguimiento post-lanzamiento",
-  "Establecer partnership con retail estrategico para distribucion inicial"
+  "Escalar piloto en Bogotá, Medellín, Cali, Manizales y Pereira",
+  "Activar campaña #Diana90sChallenge en TikTok e Instagram",
+  "Negociar presencia en Oxxo, Ara, D1 y grandes superficies",
+  "Instalar vending en campus universitarios (UAM y aliados)",
+  "Monitorear penetración del 5% (170.000 unidades año 1)"
 ]
 
 const warnings = [
   {
-    title: "Inconsistencia de naming",
-    description: "Se detecto uso de Biolumin y Biolumen. Se recomienda unificar antes del lanzamiento."
+    title: "Sensibilidad al precio",
+    description: "Inflación o competencia hard-discount podría migrar estudiantes y hogares de ingresos medios a marcas más baratas."
   },
   {
-    title: "Datos de pronostico",
-    description: "Confirmar si los valores del forecast representan ingresos o unidades vendidas."
+    title: "Capacidad de producción",
+    description: "Lote base de 10.000 unidades por corrida requiere planificación para demanda mensual de 14.167 unidades."
   }
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15
-    }
-  }
-}
+const gridStagger = staggerContainer(0.12, 0.1)
+const cardRise = riseBounce
 
 export function Conclusions() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <section className="py-24 bg-background overflow-hidden">
+    <section className="py-24 overflow-hidden">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6"
-          >
-            <Sparkles className="w-8 h-8 text-primary" />
-          </motion.div>
-
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-foreground mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            Conclusiones e Insights
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            Resumen ejecutivo de los hallazgos clave y recomendaciones para el lanzamiento de Colgate Biolumin.
-          </motion.p>
-        </motion.div>
+        <SectionHeader
+          icon={Sparkles}
+          title="Conclusiones e Insights"
+          lightOnDark
+          iconClassName="text-white"
+          iconBoxClassName="bg-white/15"
+          description="Resumen ejecutivo de los hallazgos clave y recomendaciones para el lanzamiento de Diana Express."
+        />
 
         {/* Key Insights */}
         <motion.div 
           ref={ref}
-          variants={containerVariants}
+          variants={gridStagger}
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
           className="grid md:grid-cols-3 gap-6 mb-16"
@@ -141,8 +93,8 @@ export function Conclusions() {
           {keyInsights.map((insight, index) => (
             <motion.div
               key={index}
-              variants={itemVariants}
-              whileHover={{ y: -10, scale: 1.02 }}
+              variants={cardRise}
+              whileHover={{ scale: 1.04 }}
               transition={{ duration: 0.3 }}
             >
               <Card className="bg-card border-border h-full hover:shadow-xl transition-all duration-300 group overflow-hidden relative">
@@ -153,8 +105,8 @@ export function Conclusions() {
                   <div className="flex items-start justify-between mb-4">
                     <motion.div 
                       className={`p-3 rounded-xl ${insight.bgColor}`}
-                      whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
+                      whileHover={{ scale: 1.12 }}
+                      transition={{ duration: 0.28 }}
                     >
                       <insight.icon className={`w-6 h-6 ${insight.color}`} />
                     </motion.div>
@@ -220,7 +172,7 @@ export function Conclusions() {
                   </p>
                   <p className="text-muted-foreground relative">
                     Los indicadores de mercado, aceptacion del consumidor y viabilidad economica 
-                    sugieren un potencial comercial favorable para Colgate Biolumin.
+                    sugieren un potencial comercial favorable para Diana Express.
                   </p>
                 </motion.div>
 
@@ -229,7 +181,7 @@ export function Conclusions() {
                   <ul className="space-y-2">
                     {[
                       "Diferenciacion clara vs competencia",
-                      "Respaldo de marca Colgate",
+                      "Respaldo marca Diana (+60 años)",
                       "Tecnologia innovadora validada",
                       "Segmentacion coherente con el producto",
                       "Estructura de costos definida"
@@ -293,8 +245,8 @@ export function Conclusions() {
                     >
                       <motion.span 
                         className="w-6 h-6 rounded-full bg-accent/20 text-accent text-sm font-semibold flex items-center justify-center shrink-0"
-                        initial={{ scale: 0, rotate: -180 }}
-                        whileInView={{ scale: 1, rotate: 0 }}
+                        initial={{ scale: 0, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ type: "spring", delay: 0.2 + index * 0.1 }}
                         whileHover={{ scale: 1.2, backgroundColor: "var(--accent)" }}
@@ -321,7 +273,7 @@ export function Conclusions() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-foreground">
                 <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
+                  animate={{ scale: [1, 1.06, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   <AlertCircle className="w-5 h-5 text-accent" />
@@ -390,7 +342,7 @@ export function Conclusions() {
                 className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6"
               >
                 <motion.div
-                  animate={{ y: [0, -5, 0], rotate: [0, 5, 0] }}
+                  animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   <Rocket className="w-8 h-8 text-primary" />
@@ -414,7 +366,7 @@ export function Conclusions() {
                 transition={{ delay: 0.4 }}
               >
                 Este analisis proporciona la base para tomar decisiones informadas sobre el lanzamiento 
-                de Colgate Biolumin en el mercado colombiano.
+                de Diana Express en el mercado colombiano Ready-to-Eat.
               </motion.p>
               <motion.div 
                 className="flex flex-wrap justify-center gap-4"
@@ -441,9 +393,6 @@ export function Conclusions() {
                   </Button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="lg" variant="outline" className="border-border hover:bg-muted">
-                    Contactar Equipo
-                  </Button>
                 </motion.div>
               </motion.div>
             </CardContent>

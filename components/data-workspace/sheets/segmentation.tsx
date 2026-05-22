@@ -20,10 +20,10 @@ export function SegmentationSheet({ steps, viewMode }: SegmentationSheetProps) {
     {
       id: 'A',
       name: 'Innovadores Preventivos',
-      description: 'Adultos 18-45 urbanos, interesados en prevención e innovación',
-      motivation: 'Innovación + experiencia + prevención',
-      message: '"Te avisa cuando tu boca está más ácida"',
-      strategy: 'Demostración/educación (QR, contenido, POP)',
+      description: 'Adultos 18-45 urbanos, interesados en prevenci?n e innovaci?n',
+      motivation: 'Innovaci?n + experiencia + prevenci?n',
+      message: '"Te avisa cuando tu boca est? m?s ?cida"',
+      strategy: 'Demostraci?n/educaci?n (QR, contenido, POP)',
       color: 'primary'
     },
     {
@@ -31,8 +31,8 @@ export function SegmentationSheet({ steps, viewMode }: SegmentationSheetProps) {
       name: 'Hogares Conscientes',
       description: 'Padres/cuidadores que buscan productos diferenciados',
       motivation: 'Seguridad + claridad + confianza',
-      message: '"Alerta orientativa para la prevención familiar"',
-      strategy: 'Respaldos + promociones de introducción, distribución en droguerías/supermercados',
+      message: '"Alerta orientativa para la prevenci?n familiar"',
+      strategy: 'Respaldos + promociones de introducci?n, distribuci?n en droguer?as/supermercados',
       color: 'accent'
     }
   ]
@@ -48,7 +48,7 @@ export function SegmentationSheet({ steps, viewMode }: SegmentationSheetProps) {
           <CardContent className="p-6">
             <h4 className="text-sm font-medium mb-6 flex items-center gap-2">
               <Target className="w-4 h-4 text-primary" />
-              Proceso de Segmentación (7 pasos)
+              Proceso de Segmentaci?n (7 pasos)
             </h4>
             
             {/* Step indicators */}
@@ -160,7 +160,7 @@ export function SegmentationSheet({ steps, viewMode }: SegmentationSheetProps) {
                   <div className="flex items-start gap-2">
                     <Lightbulb className="w-4 h-4 text-amber-500 mt-0.5" />
                     <div>
-                      <p className="text-xs font-medium">Motivación</p>
+                      <p className="text-xs font-medium">Motivaci?n</p>
                       <p className="text-xs text-muted-foreground">{segment.motivation}</p>
                     </div>
                   </div>
@@ -194,10 +194,10 @@ export function SegmentationSheet({ steps, viewMode }: SegmentationSheetProps) {
         <div className="flex items-start gap-2">
           <Lightbulb className="w-5 h-5 text-amber-600 mt-0.5" />
           <div>
-            <p className="text-sm font-medium text-amber-700">Insight clave de segmentación</p>
+            <p className="text-sm font-medium text-amber-700">Insight clave de segmentaci?n</p>
             <p className="text-xs text-muted-foreground mt-1">
-              El producto requiere <strong>educación</strong> para reducir fricción de adopción. 
-              Ambos segmentos necesitan claridad del beneficio; la diferencia está en que A busca innovación/experiencia 
+              El producto requiere <strong>educaci?n</strong> para reducir fricci?n de adopci?n. 
+              Ambos segmentos necesitan claridad del beneficio; la diferencia est? en que A busca innovaci?n/experiencia 
               mientras B prioriza seguridad/confianza.
             </p>
           </div>
@@ -220,9 +220,9 @@ export function SegmentationSheet({ steps, viewMode }: SegmentationSheetProps) {
               Para cerrar rigurosidad, se debe ejecutar la entrevista semiestructurada para validar:
             </p>
             <ul className="text-xs text-muted-foreground mt-2 space-y-1 list-disc list-inside">
-              <li>Comprensión del cambio de color por pH</li>
-              <li>Nivel de confianza en el indicador</li>
-              <li>Disposición de pago por el diferenciador</li>
+              <li>Percepcion de conveniencia 90 segundos</li>
+              <li>Disposicion de pago vs arroz tradicional</li>
+              <li>Preferencia variante quinua vs tradicional</li>
             </ul>
           </CardContent>
         </Card>
@@ -236,8 +236,8 @@ export function SegmentationSheet({ steps, viewMode }: SegmentationSheetProps) {
           transition={{ delay: 0.7 }}
           className="p-3 bg-muted/50 rounded-lg text-xs text-muted-foreground"
         >
-          <strong>Nota de auditoría:</strong> Los archivos &ldquo;Segmentacion Colgate Biolumin (2)&rdquo; y &ldquo;Segmentacion Colgate Biolumin (3)&rdquo; 
-          son equivalentes. Se consolidó una sola versión operativa para esta vista.
+          <strong>Nota de auditor?a:</strong> Fuente consolidada: &ldquo;Taller - Un ejemplo practico de segmentacion (1).pdf&rdquo; 
+          del Grupo Diana. Versi?n operativa ?nica en esta vista.
         </motion.div>
       )}
     </div>

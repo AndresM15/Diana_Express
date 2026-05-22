@@ -17,6 +17,8 @@ import {
 } from "recharts"
 import { TrendingUp, AlertTriangle, Calculator, Info, BarChart3 } from "lucide-react"
 import { useRef, useState } from "react"
+import { SectionHeader } from "@/components/section-header"
+import { staggerContainer, riseBounce } from "@/lib/motion-presets"
 
 // Forecast data
 const forecast2027 = {
@@ -45,10 +47,10 @@ const chartData2028 = months.map((month, index) => ({
 
 // Market context
 const marketContext = {
-  participacionColgate: 38.2,
-  tamanoMercado: 1.6, // billones COP
-  precioPromedio: 10000,
-  volumenAnual: 60 // millones de tubos
+  penetracionPiloto: 5,
+  poblacionObjetivo: 3.4, // millones (5 ciudades)
+  precioVenta: 5500,
+  volumenAnual: 170 // miles de pouches año 1
 }
 
 function formatValue(value: number) {
@@ -58,30 +60,8 @@ function formatValue(value: number) {
   return `$${(value / 1000).toFixed(0)}K`
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15
-    }
-  }
-}
+const gridStagger = staggerContainer(0.1, 0.15)
+const cardRise = riseBounce
 
 export function Forecast() {
   const ref = useRef(null)
@@ -89,49 +69,20 @@ export function Forecast() {
   const [activeTab, setActiveTab] = useState("2027")
 
   return (
-    <section className="py-24 bg-background overflow-hidden">
+    <section className="py-24 overflow-hidden">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="w-16 h-16 rounded-2xl bg-chart-2/10 flex items-center justify-center mx-auto mb-6"
-          >
-            <BarChart3 className="w-8 h-8 text-chart-2" />
-          </motion.div>
-
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-foreground mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            Pronostico de Ventas
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            Proyecciones para 2027 y 2028 usando dos metodos: pronostico lineal y suavizado exponencial.
-          </motion.p>
-        </motion.div>
+        <SectionHeader
+          icon={BarChart3}
+          title="Pronostico de Ventas"
+          iconBoxClassName="bg-accent/15 border-accent/25"
+          iconClassName="text-accent"
+          description="Proyecciones financieras con inversión inicial de $410 MM COP, VPN $627 MM y TIR 51,20% (supuestos del modelo Diana Express)."
+        />
 
         {/* Market Context */}
         <motion.div
           ref={ref}
-          variants={containerVariants}
+          variants={gridStagger}
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
           className="mb-12"
@@ -152,16 +103,16 @@ export function Forecast() {
             <CardContent>
               <div className="grid md:grid-cols-4 gap-6">
                 {[
-                  { value: `${marketContext.participacionColgate}%`, label: "Participacion Colgate", sub: "Mercado nacional", color: "text-primary" },
-                  { value: `$${marketContext.tamanoMercado}B`, label: "Tamano del sector", sub: "COP anuales", color: "text-foreground" },
-                  { value: `$${marketContext.precioPromedio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`, label: "Precio promedio", sub: "COP por unidad", color: "text-foreground" },
-                  { value: `${marketContext.volumenAnual}M`, label: "Volumen anual", sub: "Tubos estimados", color: "text-foreground" }
+                  { value: `${marketContext.penetracionPiloto}%`, label: "Penetracion piloto", sub: "Ano 1 (5 ciudades)", color: "text-primary" },
+                  { value: `${marketContext.poblacionObjetivo}M`, label: "Poblacion objetivo", sub: "18-40 anos, estratos 3-5", color: "text-foreground" },
+                  { value: `$${marketContext.precioVenta.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`, label: "Precio de venta", sub: "COP por pouch 250g", color: "text-foreground" },
+                  { value: `${marketContext.volumenAnual}K`, label: "Volumen anual", sub: "Unidades proyectadas", color: "text-foreground" }
                 ].map((item, index) => (
                   <motion.div 
                     key={index}
                     className="text-center p-4 bg-muted/50 rounded-lg hover:bg-muted/80 transition-colors cursor-pointer"
-                    variants={itemVariants}
-                    whileHover={{ y: -5, scale: 1.02 }}
+                    variants={cardRise}
+                    whileHover={{ scale: 1.03 }}
                   >
                     <motion.p 
                       className={`text-3xl font-bold ${item.color}`}
@@ -189,7 +140,7 @@ export function Forecast() {
         >
           <Alert className="mb-8 border-accent/50 bg-accent/10">
             <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
+              animate={{ opacity: [0.85, 1, 0.85] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               <AlertTriangle className="h-4 w-4 text-accent" />
@@ -229,11 +180,11 @@ export function Forecast() {
           <TabsContent value="2027">
             <motion.div 
               className="grid lg:grid-cols-3 gap-8"
-              variants={containerVariants}
+              variants={gridStagger}
               initial="hidden"
               animate={activeTab === "2027" ? "show" : "hidden"}
             >
-              <motion.div variants={itemVariants} className="lg:col-span-2">
+              <motion.div variants={cardRise} className="lg:col-span-2">
                 <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-foreground">Comparacion de Metodos - 2027</CardTitle>
@@ -270,16 +221,16 @@ export function Forecast() {
                             type="monotone" 
                             dataKey="lineal" 
                             name="Lineal" 
-                            stroke="#E31837" 
+                            stroke="#E30613" 
                             strokeWidth={2}
-                            dot={{ fill: "#E31837", strokeWidth: 2 }}
+                            dot={{ fill: "#E30613", strokeWidth: 2 }}
                             animationDuration={2000}
                           />
                           <Line 
                             type="monotone" 
                             dataKey="suavizado" 
                             name="Suavizado Exp." 
-                            stroke="#0891b2" 
+                            stroke="#003DA5" 
                             strokeWidth={2}
                             strokeDasharray="5 5"
                             dot={{ fill: "#0891b2", strokeWidth: 2 }}
@@ -292,7 +243,7 @@ export function Forecast() {
                 </Card>
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={cardRise}>
                 <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-foreground">Metodologia</CardTitle>
@@ -360,11 +311,11 @@ export function Forecast() {
           <TabsContent value="2028">
             <motion.div 
               className="grid lg:grid-cols-3 gap-8"
-              variants={containerVariants}
+              variants={gridStagger}
               initial="hidden"
               animate={activeTab === "2028" ? "show" : "hidden"}
             >
-              <motion.div variants={itemVariants} className="lg:col-span-2">
+              <motion.div variants={cardRise} className="lg:col-span-2">
                 <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-foreground">Comparacion de Metodos - 2028</CardTitle>
@@ -401,16 +352,16 @@ export function Forecast() {
                             type="monotone" 
                             dataKey="lineal" 
                             name="Lineal" 
-                            stroke="#E31837" 
+                            stroke="#E30613" 
                             strokeWidth={2}
-                            dot={{ fill: "#E31837", strokeWidth: 2 }}
+                            dot={{ fill: "#E30613", strokeWidth: 2 }}
                             animationDuration={2000}
                           />
                           <Line 
                             type="monotone" 
                             dataKey="suavizado" 
                             name="Suavizado Exp." 
-                            stroke="#0891b2" 
+                            stroke="#003DA5" 
                             strokeWidth={2}
                             strokeDasharray="5 5"
                             dot={{ fill: "#0891b2", strokeWidth: 2 }}
@@ -423,7 +374,7 @@ export function Forecast() {
                 </Card>
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={cardRise}>
                 <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-foreground">Analisis 2028</CardTitle>

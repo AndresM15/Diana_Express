@@ -20,7 +20,7 @@ const itemVariants = {
     opacity: 1, 
     y: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 100,
       damping: 15
     }
@@ -33,11 +33,10 @@ export function Footer() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="bg-foreground text-background py-12 overflow-hidden relative"
+      className="bg-diana-navy text-primary-foreground py-12 overflow-hidden relative"
     >
-      {/* Animated background accent */}
       <motion.div
-        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary"
+        className="absolute top-0 left-0 w-full h-1.5 diana-brand-bar"
         animate={{ 
           backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
         }}
@@ -60,7 +59,7 @@ export function Footer() {
               whileHover={{ x: 5 }}
             >
               <motion.div 
-                className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center relative overflow-hidden"
+                className="w-10 h-10 rounded-xl flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary to-accent"
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.5 }}
               >
@@ -70,20 +69,20 @@ export function Footer() {
                   transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                   style={{ borderRadius: "50%" }}
                 />
-                <span className="text-primary-foreground font-bold relative z-10">C</span>
+                <span className="text-primary-foreground font-bold relative z-10">D</span>
               </motion.div>
-              <span className="font-bold text-xl">Colgate Biolumin</span>
+              <span className="font-bold text-xl">Diana Express</span>
             </motion.div>
-            <p className="text-background/70 max-w-md">
-              Primera crema dental fluorada con alerta visual inteligente de acidez. 
-              Innovacion que hace visible lo invisible.
+            <p className="text-primary-foreground/75 max-w-md">
+              Arroz precocido listo en 90 segundos con tecnología Steam-Tech. 
+              La conveniencia premium del Grupo Diana.
             </p>
           </motion.div>
 
           {/* Links */}
           <motion.div variants={itemVariants}>
             <h4 className="font-semibold mb-4">Secciones</h4>
-            <ul className="space-y-2 text-background/70">
+            <ul className="space-y-2 text-primary-foreground/75">
               {[
                 { label: "Propuesta de Valor", href: "#valor" },
                 { label: "Business Canvas", href: "#canvas" },
@@ -99,7 +98,7 @@ export function Footer() {
                 >
                   <motion.a 
                     href={link.href} 
-                    className="hover:text-background transition-colors flex items-center gap-1 group"
+                    className="hover:text-primary-foreground transition-colors flex items-center gap-1 group"
                     whileHover={{ x: 5 }}
                   >
                     {link.label}
@@ -112,7 +111,7 @@ export function Footer() {
 
           <motion.div variants={itemVariants}>
             <h4 className="font-semibold mb-4">Analisis</h4>
-            <ul className="space-y-2 text-background/70">
+            <ul className="space-y-2 text-primary-foreground/75">
               {[
                 { label: "Estructura de Costos", href: "#costos" },
                 { label: "Pronostico", href: "#pronostico" },
@@ -128,7 +127,7 @@ export function Footer() {
                 >
                   <motion.a 
                     href={link.href} 
-                    className="hover:text-background transition-colors flex items-center gap-1 group"
+                    className="hover:text-primary-foreground transition-colors flex items-center gap-1 group"
                     whileHover={{ x: 5 }}
                   >
                     {link.label}
@@ -141,7 +140,7 @@ export function Footer() {
         </motion.div>
 
         <motion.div 
-          className="border-t border-background/20 pt-8"
+          className="border-t border-primary-foreground/15 pt-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -149,29 +148,29 @@ export function Footer() {
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <motion.p 
-              className="text-background/60 text-sm"
+              className="text-primary-foreground/60 text-sm"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6 }}
             >
-              2026 Colgate Biolumin - Proyecto Grupo #2
+              2026 Diana Express - Grupo Diana / UAM
             </motion.p>
             <motion.div 
-              className="flex items-center gap-6 text-sm text-background/60"
+              className="flex items-center gap-6 text-sm text-primary-foreground/60"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.7 }}
             >
               {[
-                "Disenado para: COLGATE",
-                "Fecha: 20-02-26",
-                "Version: #1"
+                "Grupo: DIANA",
+                "Unidad: Alimentos",
+                "Piloto: 5 ciudades"
               ].map((item, index) => (
                 <motion.span 
                   key={index}
-                  className="bg-background/10 px-3 py-1 rounded-full"
+                  className="bg-primary-foreground/10 px-3 py-1 rounded-full border border-primary-foreground/10"
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
                 >
                   {item}

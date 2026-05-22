@@ -121,7 +121,7 @@ export function CostSummarySheet({
         >
           <p className="text-sm text-muted-foreground">
             <strong>Vista consolidada para exposición académica.</strong> Todas las cifras se alimentan 
-            automáticamente desde las hojas de detalle. Producto base: crema dental BIOLUMEN en tubo de 90 g.
+            automáticamente desde las hojas de detalle. Producto base: Diana Express pouch 100g / 250g.
           </p>
         </motion.div>
       )}

@@ -24,121 +24,96 @@ import {
   Factory
 } from "lucide-react"
 import { useRef, useState } from "react"
+import { SectionHeader } from "@/components/section-header"
+import { staggerContainer, riseBounce } from "@/lib/motion-presets"
 
 const productionSteps = [
   {
     step: 1,
     icon: Package,
     title: "Recepcion de materias primas",
-    description: "Verificacion y almacenamiento de ingredientes segun especificaciones de calidad.",
-    details: "Se reciben y verifican: agua purificada, carbonato de calcio, silice hidratada, glicerina, indicador de pH encapsulado, tubos y cajas."
+    description: "Arroz premium e insumos validados desde Diana Agricola.",
+    details: "Se reciben arroz seleccionado, aceite vegetal, sal, condimentos y pouch laminado UHT segun ficha tecnica."
   },
   {
     step: 2,
     icon: Scale,
-    title: "Pesaje de ingredientes",
-    description: "Dosificacion precisa de cada componente segun formula establecida.",
-    details: "Uso de balanza industrial calibrada para garantizar la proporcion exacta de cada ingrediente."
+    title: "Dosificacion y lavado",
+    description: "Pesaje preciso por lote base de 10.000 unidades.",
+    details: "Balanza industrial calibrada garantiza porciones exactas por pouch y trazabilidad del lote."
   },
   {
     step: 3,
     icon: Beaker,
-    title: "Mezcla",
-    description: "Combinacion de ingredientes en tanque mezclador industrial.",
-    details: "Proceso controlado de temperatura y velocidad para asegurar homogeneidad de la base."
+    title: "Precoccion controlada",
+    description: "Proceso de vapor que sella sabor y textura del grano.",
+    details: "Tecnologia Steam-Tech: precoccion controlada que preserva el grano separado y sabroso."
   },
   {
     step: 4,
     icon: Blend,
-    title: "Homogeneizacion",
-    description: "Procesamiento para obtener textura uniforme y estable.",
-    details: "El homogeneizador garantiza la distribucion uniforme del indicador de pH encapsulado."
+    title: "Mezcla y variantes",
+    description: "Linea de arroz tradicional y quinua con verduras.",
+    details: "Homogeneizacion de variantes premium-funcional y tradicional en lineas dedicadas."
   },
   {
     step: 5,
     icon: CheckCircle2,
     title: "Control de calidad",
-    description: "Verificacion de pH, viscosidad y consistencia del producto.",
-    details: "Cada lote es analizado para confirmar que cumple con los estandares: pH 6.5-7.5, viscosidad y consistencia correctas."
+    description: "Inocuidad bajo estandares ISO y HACCP.",
+    details: "Verificacion de humedad, textura del grano, sellado del pouch y vida util de 12 meses."
   },
   {
     step: 6,
     icon: Box,
-    title: "Envasado",
-    description: "Llenado de tubos de 90g/120g con producto terminado.",
-    details: "Llenadora semiautomatica que dosifica la cantidad exacta en cada tubo."
+    title: "Llenado en pouch",
+    description: "Empaque inteligente de 100 g / 250 g segun presentacion.",
+    details: "Llenadora semiautomatica con barrera protectora que mantiene frescura y nutrientes."
   },
   {
     step: 7,
     icon: Stamp,
-    title: "Sellado y etiquetado",
-    description: "Sellado hermetico y aplicacion de etiquetas con informacion del producto.",
-    details: "Selladora de tubos y etiquetadora que garantizan la integridad y trazabilidad del producto."
+    title: "Sellado Steam-Tech",
+    description: "Barrera hermetica para rehidratacion rapida en microondas.",
+    details: "Sellado que activa el vapor interno en 90 segundos sin agua adicional."
   },
   {
     step: 8,
     icon: Truck,
-    title: "Empaque y distribucion",
-    description: "Colocacion en cajas y preparacion para envio a canales de venta.",
-    details: "Empaque en cajas plegadizas de carton, paletizado y despacho a centros de distribucion."
+    title: "Distribucion multicanal",
+    description: "Despacho a retail, conveniencia y vending universitario.",
+    details: "Paletizado y envio a supermercados, Oxxo, Ara, D1 y campus piloto."
   }
 ]
 
 const qualityIndicators = [
-  { icon: Droplets, label: "pH del producto", value: "6.5 - 7.5", status: "critical" },
-  { icon: CircleDot, label: "Viscosidad", value: "Controlada", status: "normal" },
-  { icon: Beaker, label: "Consistencia", value: "Homogenea", status: "normal" },
-  { icon: Scale, label: "Peso del envase", value: "90g +/- 2g", status: "critical" },
-  { icon: Stamp, label: "Sellado", value: "Hermetico", status: "critical" }
+  { icon: Droplets, label: "Humedad del grano", value: "Controlada", status: "critical" },
+  { icon: CircleDot, label: "Textura", value: "Grano separado", status: "normal" },
+  { icon: Beaker, label: "Inocuidad", value: "ISO / HACCP", status: "normal" },
+  { icon: Scale, label: "Peso del pouch", value: "100g / 250g", status: "critical" },
+  { icon: Stamp, label: "Sellado", value: "Hermetico UHT", status: "critical" }
 ]
 
 const productSpecs = {
-  color: "Blanco",
-  olor: "Menta fresca",
-  sabor: "Mentolado suave",
-  ph: "6.5 - 7.5",
-  vidaUtil: "24 meses",
-  almacenamiento: "Lugar fresco y seco, 15C - 30C"
+  color: "Natural / mix verduras",
+  olor: "Arroz cocido fresco",
+  sabor: "Tradicional y quinua premium",
+  ph: "N/A alimento",
+  vidaUtil: "12 meses",
+  almacenamiento: "Temperatura ambiente, lugar seco"
 }
 
 const ingredients = [
-  { name: "Agua purificada", function: "Base del producto" },
-  { name: "Carbonato de calcio", function: "Abrasivo suave para limpiar" },
-  { name: "Silice hidratada", function: "Ayuda a eliminar placa" },
-  { name: "Glicerina", function: "Mantiene la humedad" },
-  { name: "Sorbitol", function: "Endulzante y humectante" },
-  { name: "Lauril sulfato de sodio", function: "Espuma y limpieza" },
-  { name: "Fluoruro de sodio", function: "Prevencion de caries" },
-  { name: "Aromas naturales", function: "Frescura (menta/hierbabuena)" },
-  { name: "Carragenina/goma xantana", function: "Espesante" },
-  { name: "Dioxido de titanio", function: "Color blanco" },
-  { name: "Indicador de pH", function: "Cambio de color segun acidez" }
+  { name: "Arroz precocido", function: "Base del producto tradicional" },
+  { name: "Quinua y verduras", function: "Variante premium-funcional" },
+  { name: "Aceite vegetal", function: "Textura y sabor" },
+  { name: "Sal y condimentos", function: "Perfil gastronomico" },
+  { name: "Pouch laminado UHT", function: "Barrera protectora Steam-Tech" },
+  { name: "Caja display", function: "Empaque secundario retail" }
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15
-    }
-  }
-}
+const gridStagger = staggerContainer(0.1, 0.15)
+const cardRise = riseBounce
 
 export function ProductionProcess() {
   const ref = useRef(null)
@@ -146,60 +121,29 @@ export function ProductionProcess() {
   const [activeStep, setActiveStep] = useState<string | undefined>(undefined)
 
   return (
-    <section className="py-24 bg-muted/30 overflow-hidden">
+    <section className="py-24 overflow-hidden">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6"
-          >
-            <Factory className="w-8 h-8 text-primary" />
-          </motion.div>
-
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-foreground mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            Produccion y Control de Calidad
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            Proceso de fabricacion de Colgate Biolumin con los mas altos estandares de calidad y seguridad.
-          </motion.p>
-        </motion.div>
+        <SectionHeader
+          icon={Factory}
+          title="Produccion y Control de Calidad"
+          description="Proceso de fabricacion Diana Express con tecnologia Steam-Tech y estandares ISO/HACCP."
+        />
 
         {/* Product specifications */}
         <motion.div 
           ref={ref}
-          variants={containerVariants}
+          variants={gridStagger}
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
           className="grid lg:grid-cols-2 gap-8 mb-16"
         >
-          <motion.div variants={itemVariants}>
+          <motion.div variants={cardRise}>
             <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300 group">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-foreground">
                   <motion.div
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity }}
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                     className="p-2 rounded-lg bg-primary/10"
                   >
                     <Thermometer className="w-5 h-5 text-primary" />
@@ -207,7 +151,7 @@ export function ProductionProcess() {
                   Ficha Tecnica del Producto
                 </CardTitle>
                 <CardDescription>
-                  Especificaciones de Colgate Biolumin 90g / 120g
+                  Especificaciones Diana Express 100g / 250g
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -265,7 +209,7 @@ export function ProductionProcess() {
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          <motion.div variants={cardRise}>
             <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-foreground">
@@ -347,12 +291,12 @@ export function ProductionProcess() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 * index + 0.5, type: "spring" }}
-                    whileHover={{ y: -5 }}
+                    whileHover={{ scale: 1.03 }}
                     onClick={() => setActiveStep(activeStep === `step-${index}` ? undefined : `step-${index}`)}
                   >
                     <motion.div 
                       className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground mb-2 shadow-lg group-hover:shadow-xl transition-shadow"
-                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      whileHover={{ scale: 1.15 }}
                       whileTap={{ scale: 0.9 }}
                     >
                       <step.icon className="w-5 h-5" />
@@ -386,7 +330,7 @@ export function ProductionProcess() {
                         <div className="flex items-center gap-4">
                           <motion.div 
                             className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
-                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            whileHover={{ scale: 1.08 }}
                           >
                             <step.icon className="w-5 h-5" />
                           </motion.div>
@@ -442,7 +386,7 @@ export function ProductionProcess() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 * index, type: "spring" }}
-                    whileHover={{ y: -5, scale: 1.05, backgroundColor: "rgba(227, 24, 55, 0.1)" }}
+                    whileHover={{ scale: 1.03, backgroundColor: "rgba(227, 24, 55, 0.1)" }}
                   >
                     <motion.div
                       initial={{ scale: 0 }}

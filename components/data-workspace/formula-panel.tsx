@@ -28,20 +28,19 @@ const formulaDefinitions: Record<string, FormulaDefinition> = {
     formulaExcel: '=SUM(H9:H15)',
     formulaHuman: 'costo_materiales = suma(costo_por_unidad de cada material)',
     inputs: [
-      { name: 'Agua purificada', value: '44 COP', source: 'Hoja Materiales' },
-      { name: 'Carbonato de calcio', value: '144 COP', source: 'Hoja Materiales' },
-      { name: 'Sílice hidratada', value: '153 COP', source: 'Hoja Materiales' },
-      { name: 'Glicerina', value: '131,25 COP', source: 'Hoja Materiales' },
-      { name: 'Indicador pH', value: '93,375 COP', source: 'Hoja Materiales' },
-      { name: 'Tubo plástico', value: '498 COP', source: 'Hoja Materiales' },
-      { name: 'Caja plegadiza', value: '332 COP', source: 'Hoja Materiales' }
+      { name: 'Arroz precocido', value: '1.020 COP', source: 'Hoja Materiales' },
+      { name: 'Aceite vegetal', value: '144 COP', source: 'Hoja Materiales' },
+      { name: 'Sal y condimentos', value: '100 COP', source: 'Hoja Materiales' },
+      { name: 'Quinua y verduras', value: '480 COP', source: 'Hoja Materiales' },
+      { name: 'Pouch UHT', value: '420 COP', source: 'Hoja Materiales' },
+      { name: 'Caja display', value: '1.800 COP', source: 'Hoja Materiales' }
     ],
-    result: '1.395,625 COP',
+    result: '3.964 COP',
     sheet: 'Materiales y Empaque',
     usesTRM: true,
     usesBenchmark: true,
     dependencies: ['costo-unitario-material', 'cantidad-por-unidad'],
-    businessExplanation: 'Representa el costo directo de materiales e insumos para producir una unidad de crema dental BIOLUMIN de 90g. Incluye materias primas y empaque.'
+    businessExplanation: 'Representa el costo directo de materiales e insumos para producir un pouch Diana Express. Incluye arroz, condimentos, quinua (variante) y empaque UHT.'
   },
   'tangible-total': {
     id: 'tangible-total',

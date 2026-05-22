@@ -69,7 +69,7 @@ export function LogicalFrameworkSheet({ framework, viewMode }: LogicalFrameworkS
           <TabsList>
             <TabsTrigger value="normalized" className="gap-2">
               <Check className="w-3 h-3" />
-              Vista Normalizada (Biolumin)
+              Vista Normalizada (Diana Express)
             </TabsTrigger>
             <TabsTrigger value="original" className="gap-2">
               <AlertTriangle className="w-3 h-3" />
@@ -80,7 +80,7 @@ export function LogicalFrameworkSheet({ framework, viewMode }: LogicalFrameworkS
           <TabsContent value="normalized" className="mt-4">
             <Badge variant="outline" className="bg-emerald-500/10 text-emerald-600 border-emerald-500/30">
               <Check className="w-3 h-3 mr-1" />
-              Contenido adaptado a Colgate Biolumin - Cuidado Oral Preventivo
+              Contenido adaptado a Diana Express - Alimentos Ready-to-Eat
             </Badge>
           </TabsContent>
 
@@ -206,9 +206,9 @@ export function LogicalFrameworkSheet({ framework, viewMode }: LogicalFrameworkS
         >
           <h5 className="text-sm font-medium mb-2">Nota de normalización - Naming del producto</h5>
           <p className="text-xs text-muted-foreground">
-            Hay inconsistencia entre &ldquo;Biolumin&rdquo; y &ldquo;Biolumen&rdquo; en documentos fuente. 
-            <strong> Nombre comercial sugerido:</strong> Colgate Biolumin | 
-            <strong> Nombre interno/referencia:</strong> BIOLUMEN / Biolumen. 
+            Marco lógico alineado con supuestos del modelo financiero Diana Express. 
+            <strong> Nombre comercial:</strong> Diana Express | 
+            <strong> Unidad de negocio:</strong> Grupo Diana - Alimentos. 
             Ambas variaciones se conservan en auditoría.
           </p>
         </motion.div>

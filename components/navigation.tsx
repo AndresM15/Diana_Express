@@ -60,12 +60,12 @@ export function Navigation() {
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        initial={{ opacity: 0, x: -48 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
-            ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg" 
+            ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg border-b-accent/20" 
             : "bg-transparent"
         }`}
       >
@@ -78,28 +78,19 @@ export function Navigation() {
               whileTap={{ scale: 0.95 }}
             >
               <motion.div 
-                className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center relative overflow-hidden"
-                whileHover={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 0.5 }}
+                className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-primary to-accent shadow-sm"
+                whileHover={{ scale: 1.08 }}
+                transition={{ duration: 0.25 }}
               >
-                <motion.div
-                  className="absolute inset-0 bg-white/20"
-                  animate={{ 
-                    rotate: 360,
-                    scale: [1, 1.5, 1]
-                  }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  style={{ borderRadius: "50%" }}
-                />
-                <span className="text-primary-foreground font-bold text-sm relative z-10">C</span>
+                <span className="text-primary-foreground font-bold text-sm">D</span>
               </motion.div>
               <motion.span 
-                className="font-bold text-lg text-foreground"
+                className="font-bold text-lg text-foreground font-[family-name:var(--font-heading)]"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                Biolumin
+                Diana Express
               </motion.span>
             </motion.div>
 

@@ -7,72 +7,69 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Package, Factory, Users, DollarSign, Calculator } from "lucide-react"
+import { SectionHeader } from "@/components/section-header"
+import { staggerContainer, riseBounce, slideFromLeft, slideFromRight } from "@/lib/motion-presets"
 
 // Cost data
 const materialsCost = {
-  total: 1395.625,
+  total: 1864,
   items: [
-    { name: "Agua purificada", cost: 44, unit: "COP/unidad" },
-    { name: "Carbonato de calcio", cost: 144, unit: "COP/unidad" },
-    { name: "Sílice hidratada", cost: 153, unit: "COP/unidad" },
-    { name: "Glicerina", cost: 131.25, unit: "COP/unidad" },
-    { name: "Indicador encapsulado de pH", cost: 93.375, unit: "COP/unidad" },
-    { name: "Tubo plástico laminado 90g", cost: 498, unit: "COP/unidad" },
-    { name: "Caja plegadiza de cartón", cost: 332, unit: "COP/unidad" }
+    { name: "Arroz precocido", cost: 1020, unit: "COP/pouch" },
+    { name: "Aceite vegetal", cost: 144, unit: "COP/pouch" },
+    { name: "Sal y condimentos", cost: 100, unit: "COP/pouch" },
+    { name: "Pouch laminado UHT", cost: 420, unit: "COP/pouch" },
+    { name: "Caja display", cost: 180, unit: "COP/pouch" }
   ]
 }
 
 const tangibleAssets = {
-  totalInversion: 91000000,
-  costoMensual: 882500,
+  totalInversion: 280000000,
+  costoMensual: 18500000,
   items: [
-    "Tanque mezclador industrial",
-    "Homogeneizador",
-    "Llenadora semiautomática de tubos",
-    "Selladora de tubos",
-    "Etiquetadora semiautomática",
-    "Balanza industrial y mesa de pesaje",
-    "Kit utensilios sanitarios y recipientes",
-    "Acondicionamiento de área productiva"
+    "Línea de precocción y vapor Steam-Tech",
+    "Esterilizador y selladora de pouches",
+    "Llenadora semiautomática",
+    "Balanza y mesa de control",
+    "Acondicionamiento área UHT",
+    "Equipos de empaque secundario"
   ]
 }
 
 const intangibleAssets = {
-  totalInversion: 25100000,
-  costoMensual: 1240833.33,
+  totalInversion: 66500000,
+  costoMensual: 4200000,
   items: [
-    "Desarrollo de formulación y estabilidad",
-    "ERP / control de inventarios y trazabilidad",
-    "Diseño gráfico y etiquetado",
-    "Registro de marca",
-    "Documentación BPM y POES",
-    "Gestión regulatoria y soporte INVIMA"
+    "Registro INVIMA y licencias sanitarias",
+    "Marca Diana Express y diseño gráfico",
+    "ERP producción y trazabilidad",
+    "Validación inocuidad ISO/HACCP",
+    "Desarrollo formulación quinua-verduras",
+    "Gestión regulatoria alimentos"
   ]
 }
 
 const payroll = {
-  totalPersonas: 7,
-  costoMensual: 20084616.28,
+  totalPersonas: 8,
+  costoMensual: 18500000,
   smmlv2026: 1750905,
   auxTransporte: 249095,
   roles: [
-    "Químico formulador / Director técnico",
-    "Supervisor de producción",
-    "Analista de calidad",
-    "Operarios de producción (x3)",
+    "Director técnico agroindustrial",
+    "Supervisor de línea UHT",
+    "Analista de calidad alimentos",
+    "Operarios de producción (x4)",
     "Auxiliar de empaque",
     "Técnico de mantenimiento"
   ]
 }
 
 const usdReferences = [
-  { item: "Base de crema dental con flúor", cantidad: "10,000 kg", precioUSD: 4, unidad: "USD/kg" },
-  { item: "Indicador de pH", cantidad: "200 kg", precioUSD: 45, unidad: "USD/kg" },
-  { item: "Tubos plásticos laminados", cantidad: "500,000 unid", precioUSD: 0.12, unidad: "USD/unidad" },
-  { item: "Tapas plásticas", cantidad: "500,000 unid", precioUSD: 0.03, unidad: "USD/unidad" },
-  { item: "Empaques secundarios", cantidad: "500,000 unid", precioUSD: 0.08, unidad: "USD/unidad" },
-  { item: "Diseño gráfico y etiquetado", cantidad: "1 proyecto", precioUSD: 8000, unidad: "USD/proyecto" },
-  { item: "Distribución y logística", cantidad: "Por unidad", precioUSD: 0.20, unidad: "USD/unidad" }
+  { item: "Arroz premium origen nacional", cantidad: "Por lote 10.000 u", precioUSD: 0.85, unidad: "USD/kg" },
+  { item: "Pouch laminado UHT", cantidad: "10.000 unid", precioUSD: 0.10, unidad: "USD/unidad" },
+  { item: "Quinua y mix verduras", cantidad: "500 kg", precioUSD: 3.2, unidad: "USD/kg" },
+  { item: "Empaque secundario display", cantidad: "10.000 unid", precioUSD: 0.05, unidad: "USD/unidad" },
+  { item: "Registro sanitario", cantidad: "1 proyecto", precioUSD: 12000, unidad: "USD/proyecto" },
+  { item: "Distribución multicanal", cantidad: "Por unidad", precioUSD: 0.15, unidad: "USD/unidad" }
 ]
 
 function formatCOP(value: number) {
@@ -84,87 +81,41 @@ function formatCOP(value: number) {
 
 export function CostStructure() {
   return (
-    <section className="py-24 bg-muted/30">
+    <section className="py-24">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Estructura de Costos
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Desglose detallado de la inversión inicial, costos operativos mensuales y materiales por unidad producida (base 90g).
-          </p>
-        </motion.div>
+        <SectionHeader
+          icon={Calculator}
+          title="Estructura de Costos"
+          iconBoxClassName="bg-primary/15"
+          description="Inversión inicial $410 MM COP, estructura de costos por pouch y apalancamiento en integración agrícola Diana."
+        />
 
         {/* Summary Cards */}
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <Card className="bg-card border-border text-center">
-              <CardContent className="pt-6">
-                <Package className="w-8 h-8 text-primary mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground mb-1">Costo materiales/unidad</p>
-                <p className="text-2xl font-bold text-foreground">{formatCOP(materialsCost.total)}</p>
-                <Badge variant="secondary" className="mt-2">Por unidad</Badge>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <Card className="bg-card border-border text-center">
-              <CardContent className="pt-6">
-                <Factory className="w-8 h-8 text-accent mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground mb-1">Inversión tangible</p>
-                <p className="text-2xl font-bold text-foreground">{formatCOP(tangibleAssets.totalInversion)}</p>
-                <Badge variant="secondary" className="mt-2">CAPEX</Badge>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <Card className="bg-card border-border text-center">
-              <CardContent className="pt-6">
-                <Calculator className="w-8 h-8 text-chart-3 mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground mb-1">Inversión intangible</p>
-                <p className="text-2xl font-bold text-foreground">{formatCOP(intangibleAssets.totalInversion)}</p>
-                <Badge variant="secondary" className="mt-2">CAPEX</Badge>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <Card className="bg-card border-border text-center">
-              <CardContent className="pt-6">
-                <Users className="w-8 h-8 text-chart-4 mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground mb-1">Nómina mensual</p>
-                <p className="text-2xl font-bold text-foreground">{formatCOP(payroll.costoMensual)}</p>
-                <Badge variant="secondary" className="mt-2">{payroll.totalPersonas} personas</Badge>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+        <motion.div
+          className="grid md:grid-cols-4 gap-6 mb-12"
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-40px" }}
+        >
+          {[
+            { icon: Package, iconClass: "text-primary", label: "Costo materiales/unidad", value: formatCOP(materialsCost.total), badge: "Por unidad", variant: slideFromLeft },
+            { icon: Factory, iconClass: "text-accent", label: "Inversión tangible", value: formatCOP(tangibleAssets.totalInversion), badge: "CAPEX", variant: slideFromRight },
+            { icon: Calculator, iconClass: "text-chart-3", label: "Inversión intangible", value: formatCOP(intangibleAssets.totalInversion), badge: "CAPEX", variant: slideFromLeft },
+            { icon: Users, iconClass: "text-chart-4", label: "Nómina mensual", value: formatCOP(payroll.costoMensual), badge: `${payroll.totalPersonas} personas`, variant: slideFromRight },
+          ].map((card) => (
+            <motion.div key={card.label} variants={card.variant} whileHover={{ scale: 1.03 }}>
+              <Card className="bg-card border-border text-center h-full">
+                <CardContent className="pt-6">
+                  <card.icon className={`w-8 h-8 ${card.iconClass} mx-auto mb-3`} />
+                  <p className="text-sm text-muted-foreground mb-1">{card.label}</p>
+                  <p className="text-2xl font-bold text-foreground">{card.value}</p>
+                  <Badge variant="secondary" className="mt-2">{card.badge}</Badge>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Detailed breakdown */}
         <Tabs defaultValue="materiales" className="space-y-8">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { Providers } from '@/components/providers'
 import './globals.css'
 
 const inter = Inter({ 
@@ -14,8 +15,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Colgate Biolumin | Crema Dental con Indicador de pH',
-  description: 'Primera crema dental fluorada con alerta visual inteligente de acidez. Hace visible un riesgo invisible.',
+  title: 'Diana Express | Arroz Precocido en 90 Segundos',
+  description: 'Arroz precocido en pouch listo en 90 segundos. Tecnología Steam-Tech del Grupo Diana para conveniencia urbana sin sacrificar calidad.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -44,7 +45,9 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased bg-background text-foreground">
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         <Analytics />
       </body>
     </html>

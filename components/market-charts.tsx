@@ -18,21 +18,23 @@ import {
 } from "recharts"
 import { DollarSign, ShoppingCart, Users, TrendingUp } from "lucide-react"
 import { useRef, useState } from "react"
+import { SectionHeader } from "@/components/section-header"
+import { staggerContainer, riseBounce, popIn } from "@/lib/motion-presets"
 
 // Data for willingness to pay
 const willingnessData = [
-  { range: "$5K-10K", respuestas: 42, fill: "var(--color-chart-3)" },
-  { range: "$10K-15K", respuestas: 99, fill: "var(--color-chart-1)" },
-  { range: "$15K-20K", respuestas: 77, fill: "var(--color-chart-2)" }
+  { range: "$4K-5K", respuestas: 52, fill: "var(--color-chart-3)" },
+  { range: "$5K-6K", respuestas: 118, fill: "var(--color-chart-1)" },
+  { range: "$6K+", respuestas: 64, fill: "var(--color-chart-2)" }
 ]
 
 // Purchase decision factors
 const factorsData = [
-  { factor: "Calidad", valor: 130, fill: "var(--color-chart-1)" },
-  { factor: "Marca", valor: 29, fill: "var(--color-chart-2)" },
-  { factor: "Precio", valor: 27, fill: "var(--color-chart-3)" },
-  { factor: "Ingredientes naturales", valor: 24, fill: "var(--color-chart-4)" },
-  { factor: "Empaque", valor: 8, fill: "var(--color-chart-5)" }
+  { factor: "Conveniencia", valor: 142, fill: "var(--color-chart-1)" },
+  { factor: "Calidad", valor: 98, fill: "var(--color-chart-2)" },
+  { factor: "Marca Diana", valor: 76, fill: "var(--color-chart-3)" },
+  { factor: "Precio", valor: 54, fill: "var(--color-chart-4)" },
+  { factor: "Nutricion", valor: 41, fill: "var(--color-chart-5)" }
 ]
 
 // Age segmentation data
@@ -45,35 +47,14 @@ const ageData = [
 
 // Interest distribution for pie chart
 const interestPie = [
-  { name: "Si", value: 76.8, fill: "#E31837" },
-  { name: "Tal vez", value: 15.9, fill: "#0891b2" },
-  { name: "No", value: 6.4, fill: "#94a3b8" }
+  { name: "Si", value: 78, fill: "#E30613" },
+  { name: "Tal vez", value: 14, fill: "#003DA5" },
+  { name: "No", value: 8, fill: "#94a3b8" }
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15
-    }
-  }
-}
+const gridStagger = staggerContainer(0.12, 0.18)
+const cardRise = riseBounce
+const tabPop = popIn
 
 export function MarketCharts() {
   const ref = useRef(null)
@@ -81,44 +62,16 @@ export function MarketCharts() {
   const [activeTab, setActiveTab] = useState("precio")
 
   return (
-    <section className="py-24 bg-background overflow-hidden">
+    <section className="py-24 overflow-hidden">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-6"
-          >
-            <TrendingUp className="w-8 h-8 text-accent" />
-          </motion.div>
-
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-foreground mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            Analisis de Mercado
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            Visualizacion detallada de los resultados de la encuesta de validacion y segmentacion del mercado objetivo.
-          </motion.p>
-        </motion.div>
+        <SectionHeader
+          icon={TrendingUp}
+          title="Analisis de Mercado"
+          lightOnDark
+          iconClassName="text-white"
+          iconBoxClassName="bg-white/15"
+          description="Segmentacion Grupo Diana: estudiantes, jovenes profesionales y hogares unipersonales en mercado Ready-to-Eat."
+        />
 
         <Tabs defaultValue="precio" className="space-y-8" onValueChange={setActiveTab}>
           <motion.div
@@ -149,18 +102,18 @@ export function MarketCharts() {
           <TabsContent value="precio">
             <motion.div 
               ref={ref}
-              variants={containerVariants}
+              variants={gridStagger}
               initial="hidden"
               animate={isInView && activeTab === "precio" ? "show" : "hidden"}
               className="grid lg:grid-cols-2 gap-8"
             >
-              <motion.div variants={itemVariants}>
+              <motion.div variants={cardRise}>
                 <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300 group">
                   <CardHeader>
                     <CardTitle className="text-foreground flex items-center gap-2">
                       <motion.div
-                        animate={{ rotate: [0, 10, -10, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
                         className="p-2 rounded-lg bg-primary/10"
                       >
                         <DollarSign className="w-5 h-5 text-primary" />
@@ -199,7 +152,7 @@ export function MarketCharts() {
                 </Card>
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={cardRise}>
                 <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-foreground">Insight de Precio</CardTitle>
@@ -275,12 +228,12 @@ export function MarketCharts() {
           {/* Purchase Factors */}
           <TabsContent value="factores">
             <motion.div 
-              variants={containerVariants}
+              variants={gridStagger}
               initial="hidden"
               animate={activeTab === "factores" ? "show" : "hidden"}
               className="grid lg:grid-cols-2 gap-8"
             >
-              <motion.div variants={itemVariants}>
+              <motion.div variants={cardRise}>
                 <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-foreground flex items-center gap-2">
@@ -324,7 +277,7 @@ export function MarketCharts() {
                 </Card>
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={cardRise}>
                 <Card className="bg-card border-border h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-foreground">Distribucion de Interes</CardTitle>
@@ -335,8 +288,8 @@ export function MarketCharts() {
                   <CardContent>
                     <motion.div 
                       className="h-80"
-                      initial={{ opacity: 0, rotate: -10 }}
-                      animate={{ opacity: 1, rotate: 0 }}
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.3, duration: 0.5 }}
                     >
                       <ResponsiveContainer width="100%" height="100%">
@@ -370,11 +323,11 @@ export function MarketCharts() {
           {/* Age Segmentation */}
           <TabsContent value="segmentos">
             <motion.div
-              variants={containerVariants}
+              variants={gridStagger}
               initial="hidden"
               animate={activeTab === "segmentos" ? "show" : "hidden"}
             >
-              <motion.div variants={itemVariants}>
+              <motion.div variants={cardRise}>
                 <Card className="bg-card border-border hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-foreground flex items-center gap-2">
@@ -411,7 +364,7 @@ export function MarketCharts() {
                             }}
                           />
                           <Legend />
-                          <Bar dataKey="si" name="Si" fill="#E31837" radius={[4, 4, 0, 0]} animationDuration={1500} />
+                          <Bar dataKey="si" name="Si" fill="#E30613" radius={[4, 4, 0, 0]} animationDuration={1500} />
                           <Bar dataKey="talVez" name="Tal vez" fill="#0891b2" radius={[4, 4, 0, 0]} animationDuration={1500} />
                           <Bar dataKey="no" name="No" fill="#94a3b8" radius={[4, 4, 0, 0]} animationDuration={1500} />
                         </BarChart>
@@ -421,7 +374,7 @@ export function MarketCharts() {
                     {/* Age insights */}
                     <motion.div 
                       className="grid md:grid-cols-4 gap-4 mt-8"
-                      variants={containerVariants}
+                      variants={gridStagger}
                       initial="hidden"
                       animate="show"
                     >
@@ -432,8 +385,8 @@ export function MarketCharts() {
                           <motion.div 
                             key={index} 
                             className="p-4 bg-muted/50 rounded-lg text-center hover:bg-muted/80 transition-colors cursor-pointer"
-                            variants={itemVariants}
-                            whileHover={{ y: -5, scale: 1.02 }}
+                            variants={cardRise}
+                            whileHover={{ scale: 1.03 }}
                           >
                             <p className="text-lg font-semibold text-foreground">{group.edad} anos</p>
                             <motion.p 

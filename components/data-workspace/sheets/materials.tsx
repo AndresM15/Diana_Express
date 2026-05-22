@@ -1,15 +1,15 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { Package, Sparkles, Calculator, AlertCircle } from 'lucide-react'
+import { Package, TrendingUp, Calculator } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, Cell } from 'recharts'
 import type { ViewMode, Currency, Material } from '@/lib/data-types'
+import { calculateMaterialCost } from '@/lib/data-store'
 
 interface MaterialsSheetProps {
   materials: Material[]
@@ -25,43 +25,23 @@ interface MaterialsSheetProps {
 export function MaterialsSheet({
   materials, setMaterials, trm, currency, viewMode, formatCOP, formatUSD, onFormulaClick
 }: MaterialsSheetProps) {
-  const totalMaterials = materials.reduce((sum, m) => sum + m.costoPorUnidad, 0)
-  const totalEmpaque = materials.filter(m => m.clasificacion.includes('Empaque')).reduce((sum, m) => sum + m.costoPorUnidad, 0)
-  const totalMateriasPrimas = totalMaterials - totalEmpaque
-  const participacionEmpaque = (totalEmpaque / totalMaterials) * 100
-  
-  const indicadorPH = materials.find(m => m.material.includes('Indicador'))
-  const participacionIndicador = indicadorPH ? (indicadorPH.costoPorUnidad / totalMaterials) * 100 : 0
+  const totalPorUnidad = materials.reduce((sum, m) => sum + m.costoPorUnidad, 0)
+  const mayorCosto = materials.reduce((max, m) => m.costoPorUnidad > max.costoPorUnidad ? m : max, materials[0])
 
-  const pieData = [
-    { name: 'Materias Primas', value: totalMateriasPrimas, color: '#3b82f6' },
-    { name: 'Empaque', value: totalEmpaque, color: '#10b981' }
-  ]
-
-  const barData = materials.map(m => ({
-    name: m.material.length > 15 ? m.material.substring(0, 15) + '...' : m.material,
-    costo: m.costoPorUnidad
+  const chartData = materials.map(m => ({
+    name: m.material.length > 18 ? m.material.substring(0, 18) + '...' : m.material,
+    costo: Math.round(m.costoPorUnidad)
   }))
 
-  const handleMaterialChange = (index: number, field: keyof Material, value: number | string) => {
+  const handleChange = (index: number, field: keyof Material, value: number | string) => {
     const updated = [...materials]
     updated[index] = { ...updated[index], [field]: value }
-    
-    // Recalculate derived values
-    if (field === 'cantidadPorUnidad' || field === 'costoCompraRef') {
-      const baseQty = updated[index].clasificacion.includes('Empaque') ? 1 : 1000
-      updated[index].costoUnitario = updated[index].clasificacion.includes('Empaque') 
-        ? updated[index].costoCompraRef 
-        : updated[index].costoCompraRef / baseQty
-      updated[index].costoPorUnidad = updated[index].cantidadPorUnidad * updated[index].costoUnitario
-    }
-    
+    updated[index] = calculateMaterialCost(updated[index])
     setMaterials(updated)
   }
 
   return (
     <div className="space-y-6">
-      {/* Summary KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -70,10 +50,20 @@ export function MaterialsSheet({
         >
           <Card className="bg-gradient-to-br from-blue-500/10 to-transparent">
             <CardContent className="p-4">
-              <p className="text-xs text-muted-foreground mb-1">Costo total materiales/unidad</p>
-              <p className="text-xl font-bold">{formatCOP(totalMaterials)}</p>
+              <p className="text-xs text-muted-foreground mb-1">Costo materiales por unidad</p>
+              <p className="text-xl font-bold">{formatCOP(totalPorUnidad)}</p>
               {currency === 'both' && (
-                <p className="text-sm text-muted-foreground">{formatUSD(totalMaterials / trm)} USD</p>
+                <p className="text-sm text-muted-foreground">{formatUSD(totalPorUnidad / trm)} USD</p>
+              )}
+              {viewMode === 'audit' && (
+                <button
+                  type="button"
+                  onClick={() => onFormulaClick('material-total')}
+                  className="mt-2 text-[10px] text-primary hover:underline flex items-center gap-1"
+                >
+                  <Calculator className="w-3 h-3" />
+                  Ver fórmula
+                </button>
               )}
             </CardContent>
           </Card>
@@ -86,9 +76,9 @@ export function MaterialsSheet({
         >
           <Card className="bg-gradient-to-br from-emerald-500/10 to-transparent">
             <CardContent className="p-4">
-              <p className="text-xs text-muted-foreground mb-1">Costo total empaque</p>
-              <p className="text-xl font-bold">{formatCOP(totalEmpaque)}</p>
-              <p className="text-sm text-emerald-600">{participacionEmpaque.toFixed(1)}% del total</p>
+              <p className="text-xs text-muted-foreground mb-1">Insumos registrados</p>
+              <p className="text-xl font-bold">{materials.length}</p>
+              <p className="text-sm text-muted-foreground">Materias primas y empaque</p>
             </CardContent>
           </Card>
         </motion.div>
@@ -97,96 +87,55 @@ export function MaterialsSheet({
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
+          className="col-span-2"
         >
           <Card className="bg-gradient-to-br from-purple-500/10 to-transparent">
             <CardContent className="p-4">
-              <p className="text-xs text-muted-foreground mb-1">Materias primas (sin empaque)</p>
-              <p className="text-xl font-bold">{formatCOP(totalMateriasPrimas)}</p>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.25 }}
-        >
-          <Card className="bg-gradient-to-br from-amber-500/10 to-transparent border-amber-500/20">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-1 mb-1">
-                <Sparkles className="w-3 h-3 text-amber-600" />
-                <p className="text-xs text-muted-foreground">Indicador de pH</p>
-              </div>
-              <p className="text-xl font-bold">{formatCOP(indicadorPH?.costoPorUnidad || 0)}</p>
-              <p className="text-sm text-amber-600">{participacionIndicador.toFixed(2)}% del total</p>
+              <p className="text-xs text-muted-foreground mb-1">Mayor costo por unidad</p>
+              <p className="text-sm font-medium truncate">{mayorCosto.material}</p>
+              <p className="text-lg font-bold">{formatCOP(mayorCosto.costoPorUnidad)}</p>
             </CardContent>
           </Card>
         </motion.div>
       </div>
 
-      {/* Charts (Executive/Analytic View) */}
       {(viewMode === 'executive' || viewMode === 'analytic') && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <Card>
-              <CardContent className="p-4">
-                <h4 className="text-sm font-medium mb-4">Composición por clasificación</h4>
-                <div className="h-[200px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={pieData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={50}
-                        outerRadius={80}
-                        dataKey="value"
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                        labelLine={false}
-                      >
-                        {pieData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <RechartsTooltip 
-                        formatter={(value: number) => formatCOP(value)}
-                      />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.35 }}
-          >
-            <Card>
-              <CardContent className="p-4">
-                <h4 className="text-sm font-medium mb-4">Costo por componente</h4>
-                <div className="h-[200px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={barData} layout="vertical">
-                      <XAxis type="number" tickFormatter={(v) => `$${v}`} />
-                      <YAxis type="category" dataKey="name" width={100} tick={{ fontSize: 10 }} />
-                      <RechartsTooltip formatter={(value: number) => formatCOP(value)} />
-                      <Bar dataKey="costo" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <Card>
+            <CardContent className="p-4">
+              <h4 className="text-sm font-medium mb-4 flex items-center gap-2">
+                <Package className="w-4 h-4" />
+                Costo por insumo (por pouch)
+              </h4>
+              <div className="h-[250px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData} layout="vertical">
+                    <XAxis type="number" tickFormatter={(v) => `$${v}`} />
+                    <YAxis type="category" dataKey="name" width={140} tick={{ fontSize: 10 }} />
+                    <RechartsTooltip formatter={(value: number) => formatCOP(value)} />
+                    <Bar dataKey="costo" radius={[0, 4, 4, 0]}>
+                      {chartData.map((_, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={index === chartData.indexOf(chartData.find(d => d.costo === Math.max(...chartData.map(c => c.costo)))!)
+                            ? 'hsl(var(--primary))'
+                            : 'hsl(var(--muted-foreground) / 0.3)'
+                          }
+                        />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       )}
 
-      {/* Data Table */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -200,9 +149,8 @@ export function MaterialsSheet({
                   <TableRow className="bg-muted/50">
                     <TableHead className="text-xs">Material</TableHead>
                     <TableHead className="text-xs">Clasificación</TableHead>
-                    <TableHead className="text-xs">Unidad</TableHead>
-                    <TableHead className="text-xs text-right">Cantidad/Unidad</TableHead>
-                    <TableHead className="text-xs text-right">Costo Compra Ref</TableHead>
+                    <TableHead className="text-xs text-right">Cant./Unidad</TableHead>
+                    <TableHead className="text-xs text-right">Costo Compra Ref.</TableHead>
                     <TableHead className="text-xs">Base Compra</TableHead>
                     <TableHead className="text-xs text-right">
                       <div className="flex items-center justify-end gap-1">
@@ -224,59 +172,54 @@ export function MaterialsSheet({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {materials.map((material, index) => (
-                    <TableRow 
-                      key={material.material}
-                      className={material.material.includes('Indicador') ? 'bg-amber-500/5' : ''}
+                  {materials.map((item, index) => (
+                    <TableRow
+                      key={item.material}
+                      className={item.material === mayorCosto.material ? 'bg-blue-500/5' : ''}
                     >
-                      <TableCell className="text-xs font-medium">
-                        <div className="flex items-center gap-2">
-                          {material.material.includes('Indicador') && (
-                            <Sparkles className="w-3 h-3 text-amber-500" />
-                          )}
-                          {material.material}
-                        </div>
-                      </TableCell>
+                      <TableCell className="text-xs font-medium">{item.material}</TableCell>
                       <TableCell>
-                        <Badge variant="outline" className="text-[10px]">
-                          {material.clasificacion}
-                        </Badge>
+                        <Badge variant="outline" className="text-[10px]">{item.clasificacion}</Badge>
                       </TableCell>
-                      <TableCell className="text-xs">{material.unidad}</TableCell>
                       <TableCell className="text-right">
                         {viewMode === 'edit' ? (
-                          <Input
-                            type="number"
-                            value={material.cantidadPorUnidad}
-                            onChange={(e) => handleMaterialChange(index, 'cantidadPorUnidad', Number(e.target.value))}
-                            className="w-20 h-7 text-xs text-right"
-                          />
+                          <div className="flex items-center justify-end gap-1">
+                            <Input
+                              type="number"
+                              value={item.cantidadPorUnidad}
+                              onChange={(e) => handleChange(index, 'cantidadPorUnidad', Number(e.target.value))}
+                              className="w-20 h-7 text-xs text-right"
+                            />
+                            <span className="text-[10px] text-muted-foreground">{item.unidad}</span>
+                          </div>
                         ) : (
-                          <span className="text-xs">{material.cantidadPorUnidad}</span>
+                          <span className="text-xs">{item.cantidadPorUnidad} {item.unidad}</span>
                         )}
                       </TableCell>
                       <TableCell className="text-right">
                         {viewMode === 'edit' ? (
                           <Input
                             type="number"
-                            value={material.costoCompraRef}
-                            onChange={(e) => handleMaterialChange(index, 'costoCompraRef', Number(e.target.value))}
-                            className="w-24 h-7 text-xs text-right"
+                            value={item.costoCompraRef}
+                            onChange={(e) => handleChange(index, 'costoCompraRef', Number(e.target.value))}
+                            className="w-28 h-7 text-xs text-right"
                           />
                         ) : (
-                          <span className="text-xs">{formatCOP(material.costoCompraRef)}</span>
+                          <span className="text-xs">{formatCOP(item.costoCompraRef)}</span>
                         )}
                       </TableCell>
-                      <TableCell className="text-xs">{material.baseCompra}</TableCell>
+                      <TableCell className="text-xs text-muted-foreground">{item.baseCompra}</TableCell>
                       <TableCell className="text-right">
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger className="text-xs cursor-help">
-                              {formatCOP(material.costoUnitario)}
+                              {formatCOP(item.costoUnitario)}
                             </TooltipTrigger>
                             <TooltipContent>
                               <p className="font-mono text-xs">
-                                = costo_compra / base_compra
+                                {item.clasificacion.includes('Empaque')
+                                  ? '= costo_compra_ref'
+                                  : '= costo_compra_ref / base_compra'}
                               </p>
                             </TooltipContent>
                           </Tooltip>
@@ -286,23 +229,22 @@ export function MaterialsSheet({
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger className="text-xs font-medium cursor-help">
-                              {formatCOP(material.costoPorUnidad)}
+                              {formatCOP(item.costoPorUnidad)}
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p className="font-mono text-xs">
-                                = cantidad × costo_unitario
-                              </p>
+                              <p className="font-mono text-xs">= cantidad × costo_unitario</p>
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
                       </TableCell>
-                      <TableCell className="text-xs text-muted-foreground">{material.observacion}</TableCell>
+                      <TableCell className="text-xs text-muted-foreground max-w-[120px] truncate">
+                        {item.observacion}
+                      </TableCell>
                     </TableRow>
                   ))}
-                  {/* Totals Row */}
                   <TableRow className="bg-muted/50 font-bold">
-                    <TableCell colSpan={7} className="text-xs text-right">TOTAL</TableCell>
-                    <TableCell className="text-xs text-right">{formatCOP(totalMaterials)}</TableCell>
+                    <TableCell colSpan={6} className="text-xs text-right">TOTAL POR UNIDAD</TableCell>
+                    <TableCell className="text-xs text-right">{formatCOP(totalPorUnidad)}</TableCell>
                     <TableCell />
                   </TableRow>
                 </TableBody>
@@ -312,42 +254,23 @@ export function MaterialsSheet({
         </Card>
       </motion.div>
 
-      {/* Insights */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        className="p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg"
       >
-        <Card className="bg-emerald-500/5 border-emerald-500/20">
-          <CardContent className="p-4">
-            <div className="flex items-start gap-2">
-              <Package className="w-4 h-4 text-emerald-600 mt-0.5" />
-              <div>
-                <p className="text-sm font-medium text-emerald-700">Componente más costoso</p>
-                <p className="text-xs text-muted-foreground">
-                  El <strong>tubo plástico laminado 90 g</strong> representa {formatCOP(498)} por unidad, 
-                  siendo el componente individual de mayor costo.
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-amber-500/5 border-amber-500/20">
-          <CardContent className="p-4">
-            <div className="flex items-start gap-2">
-              <Sparkles className="w-4 h-4 text-amber-600 mt-0.5" />
-              <div>
-                <p className="text-sm font-medium text-amber-700">Diferenciador Biolumin</p>
-                <p className="text-xs text-muted-foreground">
-                  El indicador de pH no es el principal driver del costo unitario; 
-                  el empaque pesa más ({participacionEmpaque.toFixed(1)}% vs {participacionIndicador.toFixed(2)}%).
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="flex items-start gap-2">
+          <TrendingUp className="w-4 h-4 text-blue-600 mt-0.5" />
+          <div>
+            <p className="text-sm font-medium text-blue-700">Principales drivers del costo unitario</p>
+            <ul className="text-xs text-muted-foreground mt-2 space-y-1">
+              <li>- Pouch laminado UHT: {formatCOP(420)}</li>
+              <li>- Arroz precocido: {formatCOP(1020)}</li>
+              <li>- Mix quinua y verduras: {formatCOP(480)}</li>
+            </ul>
+          </div>
+        </div>
       </motion.div>
     </div>
   )

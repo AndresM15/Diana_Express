@@ -5,94 +5,81 @@ import type { Material, TangibleAsset, IntangibleAsset, PayrollRole, ValuationFa
 // Initial materials data
 export const initialMaterials: Material[] = [
   {
-    material: 'Agua purificada',
+    material: 'Arroz precocido premium',
     clasificacion: 'Materia prima',
     unidad: 'g',
-    cantidadPorUnidad: 22,
-    costoCompraRef: 2000,
+    cantidadPorUnidad: 85,
+    costoCompraRef: 12000,
     baseCompra: '1.000 g',
-    costoUnitario: 2,
-    costoPorUnidad: 44,
-    observacion: 'Ingrediente base'
+    costoUnitario: 12,
+    costoPorUnidad: 1020,
+    observacion: 'Origen Diana Agrícola'
   },
   {
-    material: 'Carbonato de calcio',
+    material: 'Aceite vegetal',
     clasificacion: 'Materia prima',
-    unidad: 'g',
-    cantidadPorUnidad: 32,
-    costoCompraRef: 4500,
-    baseCompra: '1.000 g',
-    costoUnitario: 4.5,
+    unidad: 'ml',
+    cantidadPorUnidad: 8,
+    costoCompraRef: 18000,
+    baseCompra: '1.000 ml',
+    costoUnitario: 18,
     costoPorUnidad: 144,
-    observacion: 'Abrasivo suave'
+    observacion: 'Textura y sabor'
   },
   {
-    material: 'Sílice hidratada',
+    material: 'Sal y condimentos',
     clasificacion: 'Materia prima',
     unidad: 'g',
-    cantidadPorUnidad: 18,
-    costoCompraRef: 8500,
+    cantidadPorUnidad: 4,
+    costoCompraRef: 25000,
     baseCompra: '1.000 g',
-    costoUnitario: 8.5,
-    costoPorUnidad: 153,
-    observacion: 'Remoción de placa'
+    costoUnitario: 25,
+    costoPorUnidad: 100,
+    observacion: 'Perfil gastronómico'
   },
   {
-    material: 'Glicerina',
+    material: 'Mix quinua y verduras',
     clasificacion: 'Materia prima',
     unidad: 'g',
-    cantidadPorUnidad: 17.5,
-    costoCompraRef: 7500,
+    cantidadPorUnidad: 15,
+    costoCompraRef: 32000,
     baseCompra: '1.000 g',
-    costoUnitario: 7.5,
-    costoPorUnidad: 131.25,
-    observacion: 'Humectante'
+    costoUnitario: 32,
+    costoPorUnidad: 480,
+    observacion: 'Variante premium-funcional'
   },
   {
-    material: 'Indicador encapsulado de pH',
-    clasificacion: 'Materia prima',
-    unidad: 'g',
-    cantidadPorUnidad: 0.5,
-    costoCompraRef: 186750,
-    baseCompra: '1.000 g',
-    costoUnitario: 186.75,
-    costoPorUnidad: 93.375,
-    observacion: 'Diferenciador BIOLUMEN'
-  },
-  {
-    material: 'Tubo plástico laminado 90 g',
+    material: 'Pouch laminado UHT',
     clasificacion: 'Empaque primario',
     unidad: 'unidad',
     cantidadPorUnidad: 1,
-    costoCompraRef: 498,
+    costoCompraRef: 420,
     baseCompra: '1 unidad',
-    costoUnitario: 498,
-    costoPorUnidad: 498,
-    observacion: 'Empaque primario'
+    costoUnitario: 420,
+    costoPorUnidad: 420,
+    observacion: 'Steam-Tech'
   },
   {
-    material: 'Caja plegadiza de cartón',
+    material: 'Caja display cartón',
     clasificacion: 'Empaque secundario',
     unidad: 'unidad',
     cantidadPorUnidad: 1,
-    costoCompraRef: 332,
+    costoCompraRef: 1800,
     baseCompra: '1 unidad',
-    costoUnitario: 332,
-    costoPorUnidad: 332,
-    observacion: 'Empaque secundario'
+    costoUnitario: 1800,
+    costoPorUnidad: 1800,
+    observacion: 'Canal retail'
   }
 ]
 
 // Initial tangible assets data
 export const initialTangibleAssets: TangibleAsset[] = [
-  { tipo: 'Maquinaria', recurso: 'Tanque mezclador industrial', cantidad: 1, costoUnitario: 18000000, costoTotal: 18000000, vidaUtil: 8, costoMensual: 187500 },
-  { tipo: 'Maquinaria', recurso: 'Homogeneizador', cantidad: 1, costoUnitario: 12000000, costoTotal: 12000000, vidaUtil: 8, costoMensual: 125000 },
-  { tipo: 'Maquinaria', recurso: 'Llenadora semiautomática de tubos', cantidad: 1, costoUnitario: 24000000, costoTotal: 24000000, vidaUtil: 10, costoMensual: 200000 },
-  { tipo: 'Maquinaria', recurso: 'Selladora de tubos', cantidad: 1, costoUnitario: 7500000, costoTotal: 7500000, vidaUtil: 8, costoMensual: 78125 },
-  { tipo: 'Equipos', recurso: 'Etiquetadora semiautomática', cantidad: 1, costoUnitario: 6500000, costoTotal: 6500000, vidaUtil: 8, costoMensual: 67708.3333 },
-  { tipo: 'Equipos', recurso: 'Balanza industrial y mesa de pesaje', cantidad: 1, costoUnitario: 1200000, costoTotal: 1200000, vidaUtil: 5, costoMensual: 20000 },
-  { tipo: 'Herramientas', recurso: 'Kit utensilios sanitarios y recipientes', cantidad: 1, costoUnitario: 1800000, costoTotal: 1800000, vidaUtil: 4, costoMensual: 37500 },
-  { tipo: 'Infraestructura', recurso: 'Acondicionamiento de área productiva', cantidad: 1, costoUnitario: 20000000, costoTotal: 20000000, vidaUtil: 10, costoMensual: 166666.6667 }
+  { tipo: 'Maquinaria', recurso: 'Línea precocción Steam-Tech', cantidad: 1, costoUnitario: 85000000, costoTotal: 85000000, vidaUtil: 10, costoMensual: 708333.33 },
+  { tipo: 'Maquinaria', recurso: 'Esterilizador y selladora UHT', cantidad: 1, costoUnitario: 62000000, costoTotal: 62000000, vidaUtil: 10, costoMensual: 516666.67 },
+  { tipo: 'Maquinaria', recurso: 'Llenadora semiautomática de pouches', cantidad: 1, costoUnitario: 28000000, costoTotal: 28000000, vidaUtil: 8, costoMensual: 291666.67 },
+  { tipo: 'Equipos', recurso: 'Balanza y mesa de control', cantidad: 1, costoUnitario: 3500000, costoTotal: 3500000, vidaUtil: 5, costoMensual: 58333.33 },
+  { tipo: 'Equipos', recurso: 'Etiquetadora semiautomática', cantidad: 1, costoUnitario: 5500000, costoTotal: 5500000, vidaUtil: 8, costoMensual: 57291.67 },
+  { tipo: 'Infraestructura', recurso: 'Acondicionamiento área UHT', cantidad: 1, costoUnitario: 42000000, costoTotal: 42000000, vidaUtil: 10, costoMensual: 350000 }
 ]
 
 // Initial intangible assets data
@@ -207,22 +194,22 @@ export const initialPayrollRoles: PayrollRole[] = [
 
 // Valuation factors
 export const initialValuationFactors: ValuationFactor[] = [
-  { factor: 'COMPETENCIA', ponderacion: 0.30, puntuacion: 5, resultadoPonderado: 1.50, justificacion: 'Colgate-Palmolive cuenta con experiencia técnica en formulación de dentífricos, control de calidad, regulación y en claims preventivos.' },
-  { factor: 'INNOVACIÓN', ponderacion: 0.25, puntuacion: 4, resultadoPonderado: 1.00, justificacion: 'El producto agrega valor real (indicador de pH con cambio de color), pero requiere validación técnica.' },
-  { factor: 'TENDENCIA', ponderacion: 0.20, puntuacion: 5, resultadoPonderado: 1.00, justificacion: 'La oportunidad se alinea con una tendencia sólida: prevención, autocuidado y consumidores informados.' },
-  { factor: 'RECURSOS', ponderacion: 0.15, puntuacion: 5, resultadoPonderado: 0.75, justificacion: 'Colgate-Palmolive posee capacidad financiera, infraestructura productiva, laboratorios y proveedores.' },
-  { factor: 'RENTABILIDAD', ponderacion: 0.10, puntuacion: 4, resultadoPonderado: 0.40, justificacion: 'Hay potencial de rentabilidad por ser un producto diferenciado con posible precio premium moderado.' }
+  { factor: 'COMPETENCIA', ponderacion: 0.30, puntuacion: 4, resultadoPonderado: 1.20, justificacion: 'Competencia en RTE y marcas importadas, pero ventaja en confianza de marca Diana y origen nacional.' },
+  { factor: 'INNOVACIÓN', ponderacion: 0.25, puntuacion: 5, resultadoPonderado: 1.25, justificacion: 'Steam-Tech y pouch de 90 segundos diferencian frente al arroz tradicional.' },
+  { factor: 'TENDENCIA', ponderacion: 0.20, puntuacion: 5, resultadoPonderado: 1.00, justificacion: 'El segmento Ready-to-Eat crece con doble dígito; la conveniencia es necesidad en 2026.' },
+  { factor: 'RECURSOS', ponderacion: 0.15, puntuacion: 5, resultadoPonderado: 0.75, justificacion: 'Integración vertical Grupo Diana: agrícola, plantas, logística e inversiones JMH.' },
+  { factor: 'RENTABILIDAD', ponderacion: 0.10, puntuacion: 5, resultadoPonderado: 0.50, justificacion: 'VPN $627 MM y TIR 51,2% superan WACC 12%; proyecto viable.' }
 ]
 
 // Segmentation steps
 export const initialSegmentationSteps: SegmentationStep[] = [
-  { paso: 1, nombre: 'Definición del objeto y alcance', contenido: 'Objetivo: identificar los segmentos con mayor probabilidad de entender, confiar y adoptar una crema dental con alerta visual de acidez (cambio de color por pH). Alcance: consumidores urbanos y compradores de dentífricos medio-premium.' },
-  { paso: 2, nombre: 'Análisis del mercado total', contenido: 'El cuidado oral es una categoría de alta penetración y consumo recurrente, con fuerte competencia por claims y precio. La compra se guía por prevención, confianza en marca, claridad del beneficio y relación costo-beneficio.' },
-  { paso: 3, nombre: 'Elaboración de perfiles', contenido: 'Segmento A (primario): adultos 18-45 urbanos, interesados en prevención e innovación. Segmento B (secundario): padres/cuidadores que buscan productos diferenciados para el hogar.' },
-  { paso: 4, nombre: 'Evaluación de la segmentación', contenido: 'A y B difieren en motivación: A valora innovación/experiencia, B prioriza seguridad y respaldo; ambos requieren claridad del beneficio para reducir dudas.' },
-  { paso: 5, nombre: 'Selección de subgrupos objetivo', contenido: 'Target principal: "early adopters" urbanos 18-45 por mayor disposición a probar innovación y pagar prima si el valor es claro. Target secundario: hogares (padres/cuidadores).' },
-  { paso: 6, nombre: 'Estrategia comercial', contenido: 'A (innovadores preventivos): posicionamiento "te avisa cuando tu boca está más ácida", con demostración/educación. B (hogares): mensaje de prevención + seguridad, reforzado con respaldos.' },
-  { paso: 7, nombre: 'Análisis final', contenido: 'La segmentación es coherente con el producto (innovación visible + educación) y permite un lanzamiento enfocado con aprendizaje rápido.' }
+  { paso: 1, nombre: 'Definición del objeto y alcance', contenido: 'Objetivos: capturar el segmento Ready-to-Eat y diversificar Alimentos con valor agregado. Alcance: jóvenes 18-40 en 5 ciudades piloto (Bogotá, Medellín, Cali, Manizales, Pereira).' },
+  { paso: 2, nombre: 'Análisis del mercado total', contenido: 'El arroz en Colombia es masivo y maduro; el subsegmento RTE es el de mayor dinamismo. Canal moderno y tiendas de conveniencia (Oxxo, Ara, D1) son puntos clave para el urbano.' },
+  { paso: 3, nombre: 'Elaboración de perfiles', contenido: 'Estudiantes: presupuesto limitado, microondas principal, zonas universitarias. Jóvenes profesionales (DINKs): ingresos estables, pagan prima por quinua. Hogares unipersonales: porciones exactas sin desperdicio.' },
+  { paso: 4, nombre: 'Evaluación de la segmentación', contenido: 'Mantener tres segmentos en lanzamiento. No aumentar: diluye presupuesto publicitario. No reducir: se pierden volumen universitario y margen premium.' },
+  { paso: 5, nombre: 'Selección de subgrupos objetivo', contenido: 'Target principal: Jóvenes profesionales (DINKs) por rentabilidad y menor sensibilidad al precio. Secundario: estudiantes por volumen en ciudades universitarias.' },
+  { paso: 6, nombre: 'Estrategia comercial', contenido: 'Profesionales: precio por valor, Rappi/Turbo, LinkedIn/Instagram (#HackAlmuerzo). Estudiantes: penetración, combos Glacial, vending campus, TikTok #Diana90sChallenge.' },
+  { paso: 7, nombre: 'Análisis final', contenido: 'Grupo Diana cuenta con plantas adaptables, red logística multicanal y respaldo de Inversiones JMH para financiar Steam-Tech sin comprometer operación.' }
 ]
 
 // Payroll calculation functions
@@ -320,9 +307,10 @@ export function calculateValuationFactor(factor: ValuationFactor): ValuationFact
 
 // Sources data
 export const sourcesData = [
-  { tipo: 'Documento del proyecto', detalle: 'Ingredientes, presentación de 90 g y etapas de producción', fuente: 'Crema Dental BIOLUMEN Produccion (1).docx' },
-  { tipo: 'Documento del proyecto', detalle: 'Producto: crema dental fluorada con indicador de pH y modelo de negocio', fuente: 'Plan_de_negocio_Biolumin.docx / PlanDeNegociosBiolumin (2).pdf' },
-  { tipo: 'Documento del proyecto', detalle: 'Tabla de insumos de referencia para crema dental con indicador de pH', fuente: '4.pdf' },
+  { tipo: 'Documento del proyecto', detalle: 'Presentación comercial y catálogo Diana Express', fuente: 'Diana-Express.pdf' },
+  { tipo: 'Documento del proyecto', detalle: 'Supuestos financieros: VPN, TIR, precio $5.500', fuente: 'Diana Express - Modelo de Costos y Proyecciones Financieras - SUPUESTOS.pdf' },
+  { tipo: 'Documento del proyecto', detalle: 'Segmentación de mercado Grupo Diana', fuente: 'Taller - Un ejemplo practico de segmentacion (1).pdf' },
+  { tipo: 'Encuesta', detalle: 'Intención de compra real 78% (pestaña Encuesta Diana)', fuente: 'Modelo de Costos - SUPUESTOS.pdf' },
   { tipo: 'Salario legal', detalle: 'SMMLV 2026 y auxilio de transporte 2026', fuente: 'https://www.buk.co/blog/salario-minimo-2026-en-colombia' },
   { tipo: 'Salario rol', detalle: 'Químico formulador', fuente: 'https://co.computrabajo.com/salarios/quimico-formulador' },
   { tipo: 'Salario rol', detalle: 'Supervisor de producción', fuente: 'https://co.indeed.com/career/supervisor-de-producción/salaries' },
@@ -362,8 +350,11 @@ export const logicalFramework = {
   },
   normalized: {
     fin: { objetivo: 'Contribuir a la innovación y crecimiento del cuidado oral preventivo en Colombia.', ivo: 'Incremento del 3% en la categoría de dentífricos premium en 3 años. Generación de 50 empleos directos e indirectos.', mv: 'Informes gremiales, ANDI, Nielsen. Estadísticas del sector cosmético.', supuestos: 'Crecimiento estable del consumo en higiene oral preventiva.' },
-    proposito: { objetivo: 'Introducir y posicionar Colgate Biolumin (crema dental con indicador de pH) en el mercado colombiano en 12 meses.', ivo: 'Alcanzar 5% de participación en dentífricos premium durante el primer año. Lograr ventas de 50.000 unidades en los primeros 12 meses.', mv: 'Reportes de ventas internos. Estudios de mercado Nielsen/Kantar. Sondeos de marca.', supuestos: 'Aceptación del producto por consumidores target y estabilidad en costos de indicador de pH.' },
+    proposito: { objetivo: 'Introducir y posicionar Diana Express (arroz precocido Steam-Tech) en 5 ciudades piloto en 12 meses.', ivo: 'Alcanzar 5% de penetración (170.000 unidades año 1). Demanda mensual promedio 14.167 unidades.', mv: 'Reportes de ventas. Encuesta Diana (78% intención compra). KPIs retail.', supuestos: 'Estabilidad TRM y aceptación del precio $5.500 COP por pouch 250g.' },
     componentes: { objetivo: '1. Producto validado técnicamente. 2. Marketing educativo implementado. 3. Distribución consolidada en grandes superficies y droguerías. 4. Usuarios satisfechos y fidelizados.', ivo: 'Estabilidad del indicador validada mes 4. Campaña educativa ejecutada mes 6. 500 puntos de venta activos mes 12. 75% satisfacción en encuestas.', mv: 'Informes de I+D y calidad. Registros de marketing. Encuestas NPS.', supuestos: 'Alianzas con Éxito, Jumbo, Droguerías Cruz Verde.' },
     actividades: { objetivo: '1.1. Validar formulación y estabilidad del indicador de pH. 1.2. Pruebas piloto con grupos focales. 2.1. Diseñar branding y contenido educativo. 2.2. Implementar QR/FAQ y demostraciones. 3.1. Negociar con retail y farmacias. 3.2. Capacitar equipos de trade marketing. 4.1. Implementar programa de fidelización y seguimiento.', ivo: 'Formulación validada mes 3. Empaques y QR listos mes 4. 100.000 interacciones digitales en 6 meses. 80 vendedores capacitados. Fidelización activa mes 10.', mv: 'Documentación técnica INVIMA. Analytics digitales. Reportes de trade. Base de clientes registrados.', supuestos: 'Aprobación regulatoria INVIMA, presupuesto de marketing disponible, estabilidad TRM.' }
   }
 }
+
+export { useProyectoStore, ProyectoStoreProvider } from './proyecto-store'
+export type { ProyectoMaterial, ProyectoIntangible } from './proyecto-store'
