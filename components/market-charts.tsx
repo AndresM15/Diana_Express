@@ -178,16 +178,16 @@ export function MarketCharts() {
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", delay: 0.3 }}
                       >
-                        $10,000 - $15,000 COP
+                        $4.500COP
                       </motion.p>
-                      <p className="text-sm text-muted-foreground mt-2 relative">99 respuestas (45%)</p>
+                      <p className="text-sm text-muted-foreground mt-2 relative">39 respuestas (34.5%)</p>
                     </motion.div>
                     
                     <div className="space-y-4">
                       {[
-                        { range: "$5,000 - $10,000", count: "42 (19%)", highlight: false },
-                        { range: "$10,000 - $15,000", count: "99 (45%)", highlight: true },
-                        { range: "$15,000 - $20,000", count: "77 (35%)", highlight: false }
+                        { range: "$7.000COP", count: "6 (5.3%)", highlight: false },
+                        { range: "$5.500COP", count: "28 (24.8%)", highlight: true },
+                        { range: "$3.500COP", count: "40 (35.4%)", highlight: false }
                       ].map((item, index) => (
                         <motion.div 
                           key={index}
@@ -210,15 +210,6 @@ export function MarketCharts() {
                         </motion.div>
                       ))}
                     </div>
-
-                    <motion.p 
-                      className="text-sm text-muted-foreground"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.7 }}
-                    >
-                      <strong className="text-foreground">Recomendacion:</strong> Lanzar con precio entre $10,000 - $15,000 COP para maximizar adopcion inicial.
-                    </motion.p>
                   </CardContent>
                 </Card>
               </motion.div>
