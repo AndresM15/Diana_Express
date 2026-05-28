@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Users, Landmark } from "lucide-react";
 
-export default function PayrollSheet() {
+export function PayrollSheet() {
   const { nomina, updateSalarioBase } = useProyectoStore();
 
   // Calcular totales de nómina

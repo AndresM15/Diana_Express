@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { HardDrive, Factory } from "lucide-react";
 
-export default function TangiblesSheet() {
+export function TangiblesSheet() {
   const { tangibles } = useProyectoStore();
 
   // Calcular la inversión total tangible
